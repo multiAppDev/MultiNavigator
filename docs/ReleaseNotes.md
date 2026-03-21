@@ -19,7 +19,7 @@ This is not just a new version. This is a milestone.
 ### What's new in 7.0.0
 
 **Complete rebuild — 25 years, zero legacy code**
-- Fully rewritten from scratch in WPF + .NET 8
+- Fully rewritten from scratch in WPF + .NET 10
 - Modern MVVM architecture with clean separation of concerns
 - Microsoft WebView2 / Chromium rendering engine
 - Local JSON persistence — no database, no cloud, no external dependencies
@@ -75,7 +75,7 @@ Esto no es solo una nueva versión. Es un hito.
 ### Novedades en la versión 7.0.0
 
 **Reconstrucción completa — 25 años, cero código heredado**
-- Reescrito íntegramente desde cero en WPF + .NET 8
+- Reescrito íntegramente desde cero en WPF + .NET 10
 - Arquitectura MVVM moderna con separación limpia de responsabilidades
 - Motor de renderizado Microsoft WebView2 / Chromium
 - Persistencia local en JSON — sin base de datos, sin nube, sin dependencias externas
