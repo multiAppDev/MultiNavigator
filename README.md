@@ -18,6 +18,7 @@
     <img src="https://img.shields.io/badge/Platform-Windows-informational.svg" alt="Platform: Windows">
     <img src="https://img.shields.io/badge/Built%20with-WebView2-green.svg" alt="Built with: WebView2">
     <img src="https://img.shields.io/badge/Since-2001-orange.svg" alt="Since: 2001">
+	<a href="https://ko-fi.com/multinavigator"><img src="https://img.shields.io/badge/Ko--fi-No%20ads.%20Just%20coffee.-FF5E5B?logo=ko-fi&logoColor=white" alt="Ko-fi"></a>
   </p>
 </div>
 
@@ -109,7 +110,7 @@ Open links in Chrome, Firefox, or Edge with one click, drag tabs to other browse
 
 ## 🧩 Tech Stack and Architecture
 
-- **Tech Stack**: WPF + .NET 8 for a fast, native, and customizable interface.
+- **Tech Stack**: WPF + .NET 10 for a fast, native, and customizable interface.
 - **Rendering Engine**: Microsoft WebView2 based on Chromium.
 - **Local-First Philosophy**: No telemetry or external communications outside of actual browsing.
 - **Architecture**: MVVM pattern for a clean separation between logic and UI.
@@ -118,7 +119,9 @@ Open links in Chrome, Firefox, or Edge with one click, drag tabs to other browse
 
 ## 🚀 Installation
 
-Download the installer directly from the [Releases](../../releases) tab.
+Download the installer directly from the [Releases](https://github.com/multiAppDev/MultiNavigator/releases) tab.
+
+☕ [No ads. Just coffee.](https://ko-fi.com/multinavigator) — If you find it useful, support the project with a voluntary donation.
 
 ---
 
@@ -138,3 +141,5 @@ The Mozilla Public License 2.0 (MPL v2.0) granted for the source code of this so
 ---
 
 *MultiNavigator — Free, Open Source, No Ads, No Tracking. Since 2001.*
+☕ [No ads. Just coffee.](https://ko-fi.com/multinavigator)
+

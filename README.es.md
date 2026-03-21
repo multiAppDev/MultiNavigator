@@ -18,6 +18,7 @@
     <img src="https://img.shields.io/badge/Plataforma-Windows-informational.svg" alt="Plataforma: Windows">
     <img src="https://img.shields.io/badge/Construido%20con-WebView2-green.svg" alt="Construido con: WebView2">
     <img src="https://img.shields.io/badge/Desde-2001-orange.svg" alt="Desde: 2001">
+	<a href="https://ko-fi.com/multinavigator"><img src="https://img.shields.io/badge/Ko--fi-No%20ads.%20Just%20coffee.-FF5E5B?logo=ko-fi&logoColor=white" alt="Ko-fi"></a>
   </p>
 </div>
 
@@ -109,7 +110,7 @@ Abre enlaces en Chrome, Firefox o Edge con un clic, arrastra pestañas a otros n
 
 ## 🧩 Detalles Técnicos y Arquitectura
 
-- **Stack Tecnológico**: WPF + .NET 8 para una interfaz rápida, nativa y personalizable.
+- **Stack Tecnológico**: WPF + .NET 10 para una interfaz rápida, nativa y personalizable.
 - **Motor de Renderizado**: Microsoft WebView2 basado en Chromium.
 - **Filosofía Local-First**: Sin telemetría ni comunicaciones externas fuera de la navegación real.
 - **Arquitectura**: Patrón MVVM para una separación limpia entre lógica e interfaz.
@@ -118,7 +119,9 @@ Abre enlaces en Chrome, Firefox o Edge con un clic, arrastra pestañas a otros n
 
 ## 🚀 Instalación
 
-Descarga el instalador directamente desde la pestaña [Releases](../../releases).
+Descarga el instalador directamente desde la pestaña [Releases](https://github.com/multiAppDev/MultiNavigator/releases).
+
+☕ [No ads. Just coffee.](https://ko-fi.com/multinavigator) — Si te resulta útil, apoya el proyecto con una donación voluntaria.
 
 ---
 
@@ -138,3 +141,5 @@ La Mozilla Public License 2.0 (MPL v2.0) otorgada para el código fuente de este
 ---
 
 *MultiNavigator — Gratuito, Código Abierto, Sin Anuncios, Sin Rastreo. Desde 2001.*
+☕ [No ads. Just coffee.](https://ko-fi.com/multinavigator)
+
