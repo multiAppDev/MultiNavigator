@@ -1,4 +1,4 @@
-# 🌐 Multinavigator 7
+# <img src="screenshots/images/logo96.png" height="96"> Multinavigator 7
 
 <p align="center">
   <strong>English 🇺🇸</strong> | 
