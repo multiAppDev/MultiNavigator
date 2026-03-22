@@ -1,6 +1,6 @@
 # <p align="center">
   <img src="screenshots/images/logo96.png" height="40">
-  <img src="screenshots/images/titleMultinavigtor.svg" height="40">
+  <img src="screenshots/images/titleMultinavigator.svg" height="40">
 </p>
 
 <p align="center">
