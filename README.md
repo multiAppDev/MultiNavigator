@@ -1,4 +1,4 @@
-# <img src="screenshots/images/logo96.png" height="40"> Multinavigator 7
+# <img src="screenshots/images/logo96.png" height="32"> Multinavigator 7
 
 <p align="center">
   <strong>English 🇺🇸</strong> | 
