@@ -1,11 +1,14 @@
-# <img src="screenshots/images/logo96.png" height="32"> Multinavigator 7
+# <p align="center">
+  <img src="screenshots/images/logo.png" height="40">
+  <img src="screenshots/images/title.svg" height="40">
+</p>
 
 <p align="center">
   <strong>English 🇺🇸</strong> | 
   <a href="README.es.md">Español 🇪🇸</a>
 </p>
 
-### > A clean, fast, and fully private Windows browser. No ads. No tracking. No compromises. Surf x4 also in 2026.
+### 🚀 A clean, fast, and fully private Windows browser. No ads. No tracking. No compromises. Surf x4 also in 2026.
 
 <div align="center">
   <a href="Screenshots/Videos/multinavigator-hero-demo.mp4">
