@@ -1,4 +1,4 @@
-# <div align="center"><img src="screenshots/images/logo96.png" height="60">&nbsp;<img src="screenshots/images/titleMultinavigator.svg" height="50"></div>
+# <div align="center"><img src="screenshots/images/logo96.png" style="top-10px;" height="60">&nbsp;<img src="screenshots/images/titleMultinavigator.svg" height="50"></div>
 
 <p align="center">
   <strong>English 🇺🇸</strong> | 
