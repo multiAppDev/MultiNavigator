@@ -5,7 +5,7 @@
   <strong>Español 🇪🇸</strong>
 </p>
 
-### > Un navegador Windows limpio, rápido y totalmente privado. Sin anuncios. Sin rastreo. Sin compromisos. Navega x4 también en 2026.
+### 💥 Un navegador Windows limpio, rápido y totalmente privado. Sin anuncios. Sin rastreo. Sin compromisos. Navega x4 también en 2026.
 
 <div align="center">
   <a href="Screenshots/Videos/multinavigator-hero-demo.mp4">
