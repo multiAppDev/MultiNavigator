@@ -27,7 +27,7 @@ MultiNavigator was born in **2001**, before Firefox or Chrome. At a time when we
 25 years later, version 7.0.0 is a complete rewrite from scratch — without a single line of original code — keeping the unique soul of the project. Registered work in the **Intellectual Property Registry of Spain**.
 
 
-<br><br>
+<br>
 ## 🖥️ Multi-Panel Navigation
 
 ### 4 Simultaneous Browsers
@@ -49,7 +49,7 @@ Set a different home URL for each panel and choose your preferred global search 
 </a>
 
 
-
+<br>
 ## 🔒 Real Privacy and Security
 
 ### Isolated Real Incognito
@@ -65,7 +65,7 @@ Individual blocking of trackers, cookies, and fingerprinting. All your configura
 </a>
 
 
-
+<br>
 ## 🎨 Customization
 
 ### Themes and Visual Editor
@@ -81,7 +81,7 @@ Assign color codes to your tabs to organize, prioritize, and visually differenti
 </a>
 
 
-
+<br>
 ## ⚡ Advanced Productivity
 
 ### Session Restore
@@ -103,7 +103,7 @@ Open links in Chrome, Firefox, or Edge with one click, drag tabs to other browse
 </a>
 
 
-
+<br>
 ## 🧩 Tech Stack and Architecture
 
 - **Tech Stack**: WPF + .NET 10 for a fast, native, and customizable interface.
@@ -112,7 +112,7 @@ Open links in Chrome, Firefox, or Edge with one click, drag tabs to other browse
 - **Architecture**: MVVM pattern for a clean separation between logic and UI.
 
 
-
+<br>
 ## 🚀 Installation
 
 Download the installer directly from the [Releases](https://github.com/multiAppDev/MultiNavigator/releases) tab.
@@ -120,7 +120,7 @@ Download the installer directly from the [Releases](https://github.com/multiAppD
 ☕ [No ads. Just coffee.](https://ko-fi.com/multinavigator) — If you find it useful, support the project with a voluntary donation.
 
 
-
+<br>
 ## 📄 Legal Notice and License
 
 **TRADEMARK NOTICE:**  
@@ -134,7 +134,7 @@ The Mozilla Public License 2.0 (MPL v2.0) granted for the source code of this so
 
 © 2001–2026 MultiNavigator. MultiNavigator is distributed under the [Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/). Original work registered in the Intellectual Property Registry of Spain since 2001.
 
----
+<br>
 
 *MultiNavigator — Free, Open Source, No Ads, No Tracking. Since 2001.*
 ☕ [No ads. Just coffee.](https://ko-fi.com/multinavigator)
