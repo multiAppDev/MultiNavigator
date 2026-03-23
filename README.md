@@ -1,5 +1,7 @@
 # <div align="center"><img src="screenshots/images/logo96trans.png" height="45">&nbsp;<img src="screenshots/images/titleMultinavigator.svg" height="50"></div>
 
+<div align="center"><img src="screenshots/images/heroImage.png"></div>
+
 <p align="center">
   <strong>English 🇺🇸</strong> | 
   <a href="README.es.md">Español 🇪🇸</a>
