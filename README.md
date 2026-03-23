@@ -7,12 +7,7 @@
 
 ### 🚀 A clean, fast, and fully private Windows browser. No ads. No tracking. No compromises. Surf x4 also in 2026.
 
-<div align="center">
-  <a href="Screenshots/Videos/multinavigator-hero-demo.mp4">
-    <video src="Screenshots/Videos/multinavigator-hero-demo.mp4" autoplay loop muted playsinline width="100%" style="max-width: 900px; border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); margin-bottom: 20px;">
-    </video>
-  </a>
-  
+
   <p align="center">
     <img src="https://img.shields.io/badge/License-MPL%20v2.0-blue.svg" alt="License: MPL v2.0">
     <img src="https://img.shields.io/badge/Platform-Windows-informational.svg" alt="Platform: Windows">
@@ -20,7 +15,7 @@
     <img src="https://img.shields.io/badge/Since-2001-orange.svg" alt="Since: 2001">
 	<a href="https://ko-fi.com/multinavigator"><img src="https://img.shields.io/badge/Ko--fi-No%20ads.%20Just%20coffee.-FF5E5B?logo=ko-fi&logoColor=white" alt="Ko-fi"></a>
   </p>
-</div>
+
 
 ---
 
