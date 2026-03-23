@@ -19,7 +19,7 @@
 <div align="center"><img src="screenshots/images/heroImage.png"></div>
 
 
-<br>
+<br><br>
 ## 📖 History — 25th Anniversary Edition 🎉
 
 MultiNavigator was born in **2001**, before Firefox or Chrome. At a time when web multitasking didn't exist, we introduced **four simultaneous independent browsers** with a movable splitter.
