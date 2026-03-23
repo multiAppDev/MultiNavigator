@@ -7,7 +7,7 @@
   <a href="README.es.md">Español 🇪🇸</a>
 </p>
 
-###<p align="center">
+### <p align="center">
    🚀 A clean, fast, and fully private Windows browser. No ads. No tracking. No compromises. Surf x4 also in 2026.
 </p>
 
