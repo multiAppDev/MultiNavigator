@@ -1,15 +1,11 @@
 # <div align="center"><img src="screenshots/images/logo96trans.png" height="45">&nbsp;<img src="screenshots/images/titleMultinavigator.svg" height="50"></div>
 
-<div align="center"><img src="screenshots/images/heroImage.png"></div>
-
 <p align="center">
   <strong>English 🇺🇸</strong> | 
   <a href="README.es.md">Español 🇪🇸</a>
 </p>
 
 ### 🚀 A clean, fast, and fully private Windows browser. No ads. No tracking. No compromises. Surf x4 also in 2026.
-
-
 
 
   <p align="center">
@@ -20,6 +16,7 @@
 	<a href="https://ko-fi.com/multinavigator"><img src="https://img.shields.io/badge/Ko--fi-No%20ads.%20Just%20coffee.-FF5E5B?logo=ko-fi&logoColor=white" alt="Ko-fi"></a>
   </p>
 
+<div align="center"><img src="screenshots/images/heroImage.png"></div>
 
 ---
 
