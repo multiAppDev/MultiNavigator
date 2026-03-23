@@ -52,6 +52,7 @@ Set a different home URL for each panel and choose your preferred global search 
 
 
 <br>
+
 ## 🔒 Real Privacy and Security
 
 ### Isolated Real Incognito
@@ -68,6 +69,7 @@ Individual blocking of trackers, cookies, and fingerprinting. All your configura
 
 
 <br>
+
 ## 🎨 Customization
 
 ### Themes and Visual Editor
@@ -84,6 +86,7 @@ Assign color codes to your tabs to organize, prioritize, and visually differenti
 
 
 <br>
+
 ## ⚡ Advanced Productivity
 
 ### Session Restore
@@ -106,6 +109,7 @@ Open links in Chrome, Firefox, or Edge with one click, drag tabs to other browse
 
 
 <br>
+
 ## 🧩 Tech Stack and Architecture
 
 - **Tech Stack**: WPF + .NET 10 for a fast, native, and customizable interface.
@@ -115,6 +119,7 @@ Open links in Chrome, Firefox, or Edge with one click, drag tabs to other browse
 
 
 <br>
+
 ## 🚀 Installation
 
 Download the installer directly from the [Releases](https://github.com/multiAppDev/MultiNavigator/releases) tab.
@@ -123,6 +128,7 @@ Download the installer directly from the [Releases](https://github.com/multiAppD
 
 
 <br>
+
 ## 📄 Legal Notice and License
 
 **TRADEMARK NOTICE:**  
