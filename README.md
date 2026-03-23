@@ -27,7 +27,7 @@ MultiNavigator was born in **2001**, before Firefox or Chrome. At a time when we
 25 years later, version 7.0.0 is a complete rewrite from scratch — without a single line of original code — keeping the unique soul of the project. Registered work in the **Intellectual Property Registry of Spain**.
 
 
-
+<br><br>
 ## 🖥️ Multi-Panel Navigation
 
 ### 4 Simultaneous Browsers
