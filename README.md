@@ -29,6 +29,7 @@ MultiNavigator was born in **2001**, before Firefox or Chrome. At a time when we
 
 
 <br>
+
 ## 🖥️ Multi-Panel Navigation
 
 ### 4 Simultaneous Browsers
