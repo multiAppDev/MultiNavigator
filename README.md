@@ -18,7 +18,7 @@
 
 <div align="center"><img src="screenshots/images/heroImage.png"></div>
 
----
+
 
 ## 📖 History — 25th Anniversary Edition 🎉
 
@@ -26,7 +26,7 @@ MultiNavigator was born in **2001**, before Firefox or Chrome. At a time when we
 
 25 years later, version 7.0.0 is a complete rewrite from scratch — without a single line of original code — keeping the unique soul of the project. Registered work in the **Intellectual Property Registry of Spain**.
 
----
+
 
 ## 🖥️ Multi-Panel Navigation
 
@@ -48,7 +48,7 @@ Set a different home URL for each panel and choose your preferred global search 
   <video src="Screenshots/Videos/feature-custom-home-search.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
 </a>
 
----
+
 
 ## 🔒 Real Privacy and Security
 
@@ -64,7 +64,7 @@ Individual blocking of trackers, cookies, and fingerprinting. All your configura
   <video src="Screenshots/Videos/feature-privacy-local-storage.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
 </a>
 
----
+
 
 ## 🎨 Customization
 
@@ -80,7 +80,7 @@ Assign color codes to your tabs to organize, prioritize, and visually differenti
   <video src="Screenshots/Videos/feature-tab-color-marking.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
 </a>
 
----
+
 
 ## ⚡ Advanced Productivity
 
@@ -102,7 +102,7 @@ Open links in Chrome, Firefox, or Edge with one click, drag tabs to other browse
   <video src="Screenshots/Videos/feature-external-interaction.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
 </a>
 
----
+
 
 ## 🧩 Tech Stack and Architecture
 
@@ -111,7 +111,7 @@ Open links in Chrome, Firefox, or Edge with one click, drag tabs to other browse
 - **Local-First Philosophy**: No telemetry or external communications outside of actual browsing.
 - **Architecture**: MVVM pattern for a clean separation between logic and UI.
 
----
+
 
 ## 🚀 Installation
 
@@ -119,7 +119,7 @@ Download the installer directly from the [Releases](https://github.com/multiAppD
 
 ☕ [No ads. Just coffee.](https://ko-fi.com/multinavigator) — If you find it useful, support the project with a voluntary donation.
 
----
+
 
 ## 📄 Legal Notice and License
 
