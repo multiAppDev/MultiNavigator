@@ -38,6 +38,8 @@ Manage four independent instances in a single window, optimizing workflow and el
   <video src="screenshots/videos/feature-4-panes-multitasking.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
 </a>
 
+<video src="screenshots/videos/feature-4-panes-multitasking.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 
+
 ### Movable Splitter
 Drag the central divider to resize each panel in real-time according to your viewing needs.
 <a href="screenshots/videos/feature-movable-splitter.mp4">
