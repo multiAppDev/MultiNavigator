@@ -83,22 +83,17 @@ https://github.com/user-attachments/assets/1583d2c4-e362-471b-9074-80ec371660a8
 
 ### Session Restore
 Pick up exactly where you left off. When the browser opens, the four panels are automatically recovered with their previous tabs and states.
-<a href="screenshots/videos/feature-session-restore.mp4">
-  <video src="screenshots/videos/feature-session-restore.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
-</a>
+
 
 ### Startup Notes and Alerts
 Integrated reminder management. Create quick notes and important notices that appear when the browser starts.
-<a href="screenshots/videos/feature-startup-notes-alerts.mp4">
-  <video src="screenshots/videos/feature-startup-notes-alerts.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
-</a>
+
+https://github.com/user-attachments/assets/e3b938c3-93dd-4f13-b05d-3f0d343484e5
 
 ### External Interaction and Migration
 Open links in Chrome, Firefox, or Edge with one click, drag tabs to other browsers, or import bookmarks easily.
-<a href="screenshots/videos/feature-external-interaction.mp4">
-  <video src="screenshots/videos/feature-external-interaction.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
-</a>
 
+https://github.com/user-attachments/assets/84a66621-2d1d-4d20-9794-917365a6e41b
 
 <br>
 
