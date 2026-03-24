@@ -74,10 +74,8 @@ https://github.com/user-attachments/assets/bd0e017d-def6-4389-b3a0-fecc20a7db47
 
 ### Tab Color Marking
 Assign color codes to your tabs to organize, prioritize, and visually differentiate them at a glance.
-<a href="screenshots/videos/feature-tab-color-marking.mp4">
-  <video src="screenshots/videos/feature-tab-color-marking.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
-</a>
 
+https://github.com/user-attachments/assets/1583d2c4-e362-471b-9074-80ec371660a8
 
 <br>
 
