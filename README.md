@@ -40,6 +40,7 @@ Manage four independent instances in a single window, optimizing workflow and el
 
 https://github.com/multiAppDev/MultiNavigator/screenshots/videos/feature-4-panes-multitasking.mp4
 
+https://github.com/multiAppDev/MultiNavigator/tree/main/screenshots/videos/feature-4-panes-multitasking.mp4
 
 ### Movable Splitter
 Drag the central divider to resize each panel in real-time according to your viewing needs.
