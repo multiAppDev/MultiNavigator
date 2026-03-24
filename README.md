@@ -34,20 +34,20 @@ MultiNavigator was born in **2001**, before Firefox or Chrome... ☕ [Still need
 
 ### 4 Simultaneous Browsers
 Manage four independent instances in a single window, optimizing workflow and eliminating the need to switch between tabs.
-<a href="Screenshots/Videos/feature-4-panes-multitasking.mp4">
-  <video src="Screenshots/Videos/feature-4-panes-multitasking.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
+<a href="Screenshots/videos/feature-4-panes-multitasking.mp4">
+  <video src="Screenshots/videos/feature-4-panes-multitasking.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
 </a>
 
 ### Movable Splitter
 Drag the central divider to resize each panel in real-time according to your viewing needs.
-<a href="Screenshots/Videos/feature-movable-splitter.mp4">
-  <video src="Screenshots/Videos/feature-movable-splitter.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
+<a href="Screenshots/videos/feature-movable-splitter.mp4">
+  <video src="Screenshots/videos/feature-movable-splitter.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
 </a>
 
 ### Home Pages and Search Engine
 Set a different home URL for each panel and choose your preferred global search engine for a tailored browsing experience.
-<a href="Screenshots/Videos/feature-custom-home-search.mp4">
-  <video src="Screenshots/Videos/feature-custom-home-search.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
+<a href="Screenshots/videos/feature-custom-home-search.mp4">
+  <video src="Screenshots/videos/feature-custom-home-search.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
 </a>
 
 
@@ -57,14 +57,14 @@ Set a different home URL for each panel and choose your preferred global search 
 
 ### Isolated Real Incognito
 Sandboxed navigation that allows normal and incognito sessions to coexist side-by-side in the same window, completely separated from each other.
-<a href="Screenshots/Videos/feature-isolated-incognito.mp4">
-  <video src="Screenshots/Videos/feature-isolated-incognito.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
+<a href="Screenshots/videos/feature-isolated-incognito.mp4">
+  <video src="Screenshots/videos/feature-isolated-incognito.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
 </a>
 
 ### Granular Control and Local Storage
 Individual blocking of trackers, cookies, and fingerprinting. All your configuration data is stored locally in JSON files, never in the cloud.
-<a href="Screenshots/Videos/feature-privacy-local-storage.mp4">
-  <video src="Screenshots/Videos/feature-privacy-local-storage.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
+<a href="Screenshots/videos/feature-privacy-local-storage.mp4">
+  <video src="Screenshots/videos/feature-privacy-local-storage.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
 </a>
 
 
@@ -74,14 +74,14 @@ Individual blocking of trackers, cookies, and fingerprinting. All your configura
 
 ### Themes and Visual Editor
 Full aesthetic personalization. Toggle between predefined themes or use the integrated editor to adjust every color of the interface.
-<a href="Screenshots/Videos/feature-theme-editor.mp4">
-  <video src="Screenshots/Videos/feature-theme-editor.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
+<a href="Screenshots/videos/feature-theme-editor.mp4">
+  <video src="Screenshots/videos/feature-theme-editor.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
 </a>
 
 ### Tab Color Marking
 Assign color codes to your tabs to organize, prioritize, and visually differentiate them at a glance.
-<a href="Screenshots/Videos/feature-tab-color-marking.mp4">
-  <video src="Screenshots/Videos/feature-tab-color-marking.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
+<a href="Screenshots/videos/feature-tab-color-marking.mp4">
+  <video src="Screenshots/videos/feature-tab-color-marking.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
 </a>
 
 
@@ -91,20 +91,20 @@ Assign color codes to your tabs to organize, prioritize, and visually differenti
 
 ### Session Restore
 Pick up exactly where you left off. When the browser opens, the four panels are automatically recovered with their previous tabs and states.
-<a href="Screenshots/Videos/feature-session-restore.mp4">
-  <video src="Screenshots/Videos/feature-session-restore.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
+<a href="Screenshots/videos/feature-session-restore.mp4">
+  <video src="Screenshots/videos/feature-session-restore.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
 </a>
 
 ### Startup Notes and Alerts
 Integrated reminder management. Create quick notes and important notices that appear when the browser starts.
-<a href="Screenshots/Videos/feature-startup-notes-alerts.mp4">
-  <video src="Screenshots/Videos/feature-startup-notes-alerts.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
+<a href="Screenshots/videos/feature-startup-notes-alerts.mp4">
+  <video src="Screenshots/videos/feature-startup-notes-alerts.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
 </a>
 
 ### External Interaction and Migration
 Open links in Chrome, Firefox, or Edge with one click, drag tabs to other browsers, or import bookmarks easily.
-<a href="Screenshots/Videos/feature-external-interaction.mp4">
-  <video src="Screenshots/Videos/feature-external-interaction.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
+<a href="Screenshots/videos/feature-external-interaction.mp4">
+  <video src="Screenshots/videos/feature-external-interaction.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
 </a>
 
 
