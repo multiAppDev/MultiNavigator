@@ -1,7 +1,7 @@
 <div align="center"><img src="screenshots/images/logo96trans.png" height="45">&nbsp;<img src="screenshots/images/titleMultinavigator.svg" height="50"></div>
 <p align="center">
-<strong>English 🇺🇸</strong> |
-<a href="README.es.md">Español 🇪🇸</a>
+<a href="README.md">English 🇺🇸</a>
+<strong>Español 🇪🇸</strong>
 </p>
 
 🚀 Un navegador para Windows limpio, rápido y totalmente privado. Sin anuncios. Sin rastreo. Sin concesiones. Navega x4 también en 2026.
