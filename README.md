@@ -112,7 +112,7 @@ https://github.com/user-attachments/assets/84a66621-2d1d-4d20-9794-917365a6e41b
 
 Download the installer directly from the [Releases](https://github.com/multiAppDev/MultiNavigator/releases) tab.
 
-☕ [No ads. Just coffee.](https://ko-fi.com/multinavigator) — If you find it useful, support the project with a voluntary donation.
+☕ [No ads. Just coffee.](https://ko-fi.com/multinavigator) — If you find it useful, invite me a coffee.
 
 
 <br>
