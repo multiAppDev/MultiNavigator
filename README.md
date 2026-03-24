@@ -51,9 +51,8 @@ Set a different home URL for each panel and choose your preferred global search 
 
 ### Isolated Real Incognito
 Sandboxed navigation that allows normal and incognito sessions to coexist side-by-side in the same window, completely separated from each other.
-<a href="screenshots/videos/feature-isolated-incognito.mp4">
-  <video src="screenshots/videos/feature-isolated-incognito.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
-</a>
+
+https://github.com/user-attachments/assets/b590f489-0db9-4281-84bd-f65a11c081e5
 
 ### Granular Control and Local Storage
 Individual blocking of trackers, cookies, and fingerprinting. All your configuration data is stored locally in JSON files, never in the cloud.
