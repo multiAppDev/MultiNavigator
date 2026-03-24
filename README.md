@@ -65,9 +65,12 @@ Individual blocking of trackers, cookies, and fingerprinting. All your configura
 
 ### Themes and Visual Editor
 Full aesthetic personalization. Toggle between predefined themes or use the integrated editor to adjust every color of the interface.
-<a href="screenshots/videos/feature-theme-editor.mp4">
-  <video src="screenshots/videos/feature-theme-editor.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
-</a>
+
+
+
+https://github.com/user-attachments/assets/bd0e017d-def6-4389-b3a0-fecc20a7db47
+
+
 
 ### Tab Color Marking
 Assign color codes to your tabs to organize, prioritize, and visually differentiate them at a glance.
