@@ -39,10 +39,7 @@ https://github.com/user-attachments/assets/44a2c553-151a-47dd-bed8-77fb5a75eb42
 
 ### Home Pages and Search Engine
 Set a different home URL for each panel and choose your preferred global search engine for a tailored browsing experience.
-<a href="screenshots/videos/feature-custom-home-search.mp4">
-  <video src="screenshots/videos/feature-custom-home-search.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
-</a>
-
+<img src="screenshots/images/feature-custom-home-search.png">
 
 <br>
 
