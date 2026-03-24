@@ -39,6 +39,7 @@ https://github.com/user-attachments/assets/44a2c553-151a-47dd-bed8-77fb5a75eb42
 
 ### Home Pages and Search Engine
 Set a different home URL for each panel and choose your preferred global search engine for a tailored browsing experience.
+
 <img src="screenshots/images/feature-custom-home-search.png">
 
 <br>
