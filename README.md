@@ -18,6 +18,9 @@
 
 <div align="center"><img src="screenshots/images/heroImage.png"></div>
 
+<p align="center">
+  EN · ES · ZH · HI · NL · PT · FR · DE · JA · RU · KO · TR · ID · IT · BN · VI · PL · TH · SW · TL · UK · CS · RO · MS · UR
+</p>
 
 <br><br>
 
