@@ -38,7 +38,7 @@ Manage four independent instances in a single window, optimizing workflow and el
   <video src="screenshots/videos/feature-4-panes-multitasking.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
 </a>
 
-screenshots/videos/feature-4-panes-multitasking.mp4
+https://github.com/multiAppDev/MultiNavigator/screenshots/videos/feature-4-panes-multitasking.mp4
 
 
 ### Movable Splitter
