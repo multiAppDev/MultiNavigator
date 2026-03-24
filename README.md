@@ -32,18 +32,10 @@ MultiNavigator was born in **2001**, before Firefox or Chrome... ☕ [Still need
 
 ## 🖥️ Multi-Panel Navigation
 
-### 4 Simultaneous Browsers
-Manage four independent instances in a single window, optimizing workflow and eliminating the need to switch between tabs.
+### 4 Simultaneous Browsers & Movable Splitter
+Manage four independent instances in a single window, optimizing workflow and eliminating the need to switch between tabs. Drag the central divider to resize each panel in real-time according to your viewing needs.
 
 https://github.com/user-attachments/assets/44a2c553-151a-47dd-bed8-77fb5a75eb42
-
-
-
-### Movable Splitter
-Drag the central divider to resize each panel in real-time according to your viewing needs.
-<a href="screenshots/videos/feature-movable-splitter.mp4">
-  <video src="screenshots/videos/feature-movable-splitter.mp4" autoplay loop muted playsinline width="100%" style="border-radius: 10px; border: 1px solid #30363d; margin-top: 10px;"></video>
-</a>
 
 ### Home Pages and Search Engine
 Set a different home URL for each panel and choose your preferred global search engine for a tailored browsing experience.
