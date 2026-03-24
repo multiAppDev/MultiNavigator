@@ -22,7 +22,15 @@
   EN · ES · ZH · HI · NL · PT · FR · DE · JA · RU · KO · TR · ID · IT · BN · VI · PL · TH · SW · TL · UK · CS · RO · MS · UR
 </p>
 
-<br><br>
+<br>
+
+<p align="center">
+  <a href="https://github.com/multiAppDev/MultiNavigator/raw/main/Releases/MultiNavigator7_Setup.exe">
+    <img src="https://img.shields.io/badge/Download-Installer-blue?style=for-the-badge&logo=windows&logoColor=white" alt="Download MultiNavigator">
+  </a>
+</p>
+
+<br>
 
 ## 📖 History — 25th Anniversary Edition 🎉
 
