@@ -34,6 +34,7 @@ MultiNavigator was born in **2001**, before Firefox or Chrome... ☕ [Still need
 
 ### 4 Simultaneous Browsers
 Manage four independent instances in a single window, optimizing workflow and eliminating the need to switch between tabs.
+
 https://github.com/user-attachments/assets/44a2c553-151a-47dd-bed8-77fb5a75eb42
 
 
