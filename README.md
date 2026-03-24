@@ -57,6 +57,7 @@ https://github.com/user-attachments/assets/b590f489-0db9-4281-84bd-f65a11c081e5
 ### Granular Control and Local Storage
 Individual blocking of trackers, cookies, and fingerprinting. All your configuration data is stored locally in JSON files, never in the cloud.
 
+<img src="screenshots/images/feature-custom-home-search.png">
 <img src="screenshots/images/feature-privacy-local-storage.png"> 
   
 <br>
