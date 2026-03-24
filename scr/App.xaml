@@ -1,0 +1,32 @@
+﻿<Application x:Class="Multinavigator.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Multinavigator"
+             xmlns:lang="clr-namespace:Multinavigator.Idiomas"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <lang:Idioma x:Key="IdiomaGlobal" />
+        <!-- COLORES DINÁMICOS -->
+        <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#EAEAEA"/>
+        <SolidColorBrush x:Key="WindowForegroundBrush" Color="Black"/>
+        <SolidColorBrush x:Key="BorderBrush" Color="#DDDDDD"/>
+        <SolidColorBrush x:Key="TabInactiveBrush" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="TabActiveBrush" Color="White"/>
+        <SolidColorBrush x:Key="TabHoverBrush" Color="#FFF5F5F5"/>
+        <SolidColorBrush x:Key="TabActiveHoverBrush" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="TabTextBrush" Color="Black"/>
+        <SolidColorBrush x:Key="IncognitoInactiveBrush" Color="#FF404040"/>
+        <SolidColorBrush x:Key="IncognitoActiveBrush" Color="#FF151515"/>
+        <SolidColorBrush x:Key="IncognitoHoverBrush" Color="#FF505050"/>
+        <SolidColorBrush x:Key="IncognitoActiveHoverBrush" Color="#222222"/>
+        <SolidColorBrush x:Key="IncognitoTextBrush" Color="White"/>
+        <SolidColorBrush x:Key="NavBarBackgroundBrush" Color="White"/>
+        <SolidColorBrush x:Key="NavBarForegroundBrush" Color="Black"/>
+        <SolidColorBrush x:Key="UrlBoxBackgroundBrush" Color="#FFE9EFF9"/>
+        <SolidColorBrush x:Key="UrlBoxForegroundBrush" Color="Black"/>
+        <SolidColorBrush x:Key="ButtonAccentBrush" Color="#FF4B96EA"/>
+        <SolidColorBrush x:Key="ButtonHoverBrush" Color="#DDDDDD"/>
+        <SolidColorBrush x:Key="ButtonPressedBrush" Color="#CCCCCC"/>
+        <SolidColorBrush x:Key="ButtonCentroBrush" Color="#FF4B96EA"/>
+    </Application.Resources>
+</Application>
