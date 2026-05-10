@@ -3,8 +3,7 @@
 ---
 
 ## Short description (up to 255 characters)
-A clean, fast, and truly private Windows browser. No ads, no telemetry, no accounts required. Open source since 2001. View 4 websites simultaneously with real isolated incognito tabs.
-
+A clean, fast, and truly private Windows browser. No ads, no telemetry. Features a unique Multi-Identity Incognito system: run multiple isolated private sessions with independent cookies in 4 simultaneous viewports. Open source since 2001.
 ---
 
 ## Long description
@@ -22,7 +21,7 @@ MultiNavigator was first released in 2001 — before Firefox, before Chrome. It 
 
 🪟 4 simultaneous browsers in split view — View four independent web pages at the same time on a single screen. Drag the central divider to resize each pane exactly how you want it.
 
-🕵️ True isolated incognito tabs — Run private and normal browsing sessions side by side in the same window, completely sandboxed from each other. A unique approach not found in mainstream browsers.
+🕵️ Multi-Identity Incognito (Numbered Sessions) — The most powerful private browsing engine. Unlike other browsers, you can run multiple independent incognito sessions (Session 1, 2, 3...) simultaneously. Each one is a 100% isolated sandbox with its own cookies. Log into the same site with different accounts side-by-side!
 
 🎛️ Granular privacy control — Decide individually what to allow on the web: telemetry, trackers, fingerprinting, cookies and more. Not just an on/off switch — real control.
 
