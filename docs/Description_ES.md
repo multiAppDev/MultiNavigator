@@ -3,7 +3,7 @@
 ---
 
 ## Descripción corta (hasta 255 caracteres)
-Un navegador Windows limpio, rápido y verdaderamente privado. Sin anuncios, sin telemetría, sin cuentas. Código abierto desde 2001. Ve 4 sitios web simultáneamente con pestañas incógnito realmente aisladas.
+Navegador para Windows limpio, rápido y privado. Sin anuncios ni telemetría. Sistema único de Incógnito Multi-Identidad: gestiona múltiples sesiones privadas aisladas con cookies independientes en 4 paneles simultáneos. Open Source desde 2001.
 
 ---
 
@@ -22,7 +22,9 @@ MultiNavigator se publicó por primera vez en 2001 — antes que Firefox, antes 
 
 🪟 4 navegadores simultáneos en pantalla dividida — Visualiza cuatro páginas web independientes al mismo tiempo en una sola pantalla. Arrastra el divisor central para ajustar el tamaño de cada navegador exactamente como quieras.
 
-🕵️ Pestañas incógnito verdaderamente aisladas — Ejecuta sesiones de navegación privada y normal una al lado de la otra en la misma ventana, completamente aisladas entre sí. Un enfoque único que no se encuentra en los navegadores convencionales.
+🕵️ Incógnito Multi-Identidad (Sesiones Numeradas) — El sistema de navegación privada más potente. A diferencia de otros navegadores, puedes ejecutar múltiples sesiones de incógnito independientes (Sesión 1, 2, 3...) a la vez. Cada una es un "sandbox" aislado con sus propias cookies. Esto permite, por ejemplo, tener abiertas varias cuentas de la misma red social una al lado de la otra sin que se crucen los datos.
+
+🎨 Identificación Visual de Sesión — Cada sesión privada cuenta con un código de color y número único. No vuelvas a confundir tus cuentas. Arrastra enlaces entre paneles manteniendo la identidad y el perfil de cookies de la sesión.
 
 🎛️ Control de privacidad granular — Decide individualmente qué permitir en la web: telemetría, rastreadores, fingerprinting, cookies y más. No es solo un interruptor de encendido/apagado — control real.
 
