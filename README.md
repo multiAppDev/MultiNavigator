@@ -57,8 +57,15 @@ Set a different home URL for each panel and choose your preferred global search 
 
 ## 🔒 Real Privacy and Security
 
-### Isolated Real Incognito
-Sandboxed navigation that allows normal and incognito sessions to coexist side-by-side in the same window, completely separated from each other.
+### Multi-Identity Incognito (Advanced Sandboxing)
+Unlike standard browsers that share a single private session, MultiNavigator 7 introduces **Numbered Isolated Sessions**. This allows you to manage multiple independent identities simultaneously in the same window.
+
+*   **Total Isolation:** Each incognito session (Session 1, 2, 3...) is a 100% separate sandbox with its own cookies and local storage.
+*   **Visual Identity:** Each session is identified by a unique color-coded badge and number, preventing cross-account mistakes.
+*   **Smart Inheritance:**
+    *   **Drag & Drop:** Dragging links to the tab bar or webview inherits the session number and cookie profile.
+    *   **Context Persistence:** Closing a tab won't destroy the session until the last tab of that specific number is closed.
+*   **Zero-Trace Policy:** Incognito tabs are never restored upon restart, ensuring your activity remains volatile and private.
 
 https://github.com/user-attachments/assets/b590f489-0db9-4281-84bd-f65a11c081e5
 
