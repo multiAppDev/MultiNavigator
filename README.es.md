@@ -57,13 +57,20 @@ Establece una URL de inicio diferente para cada panel y elige tu motor de búsqu
 
 ## 🔒 Privacidad y Seguridad Real
 
-### Incógnito Real Aislado
-Navegación en "sandbox" que permite que sesiones normales y de incógnito coexistan de lado a lado en la misma ventana, completamente separadas entre sí.
+### Incógnito Multi-Identidad (Sandboxing Avanzado)
+A diferencia de los navegadores estándar que comparten una única sesión privada global, MultiNavigator 7 introduce las **Sesiones Aisladas Numeradas**. Esto permite gestionar múltiples identidades independientes simultáneamente en la misma ventana.
+
+*   **Aislamiento Total:** Cada sesión de incógnito (Sesión 1, 2, 3...) es un "sandbox" 100% independiente con sus propias cookies y almacenamiento local.
+*   **Identidad Visual:** Cada sesión se identifica mediante un círculo de color y un número único, evitando errores al publicar o navegar entre diferentes cuentas.
+*   **Herencia Inteligente:**
+    *   **Arrastrar y Soltar:** Al arrastrar enlaces a la barra de pestañas o al WebView, se hereda automáticamente el número de sesión y el perfil de cookies.
+    *   **Persistencia de Contexto:** Al cerrar una pestaña no se destruye la sesión hasta que se cierra la última pestaña de ese número específico.
+*   **Política de Rastro Cero:** Las pestañas de incógnito nunca se restauran al reiniciar el navegador, garantizando que tu actividad sea volátil y privada.
 
 https://github.com/user-attachments/assets/b590f489-0db9-4281-84bd-f65a11c081e5
 
-### Control granular y almacenamiento local
-Bloqueo individual de rastreadores, cookies y "fingerprinting". Todos tus datos de configuración se almacenan localmente en archivos JSON, nunca en la nube.
+### Control Granular y Almacenamiento Local
+Bloqueo individual de rastreadores, cookies y huella digital (fingerprinting). Todos tus datos de configuración se almacenan localmente en archivos JSON, nunca en la nube.
 
 <img src="screenshots/images/feature-advanced-settings.png">
 <img src="screenshots/images/feature-privacy-local-storage.png"> 
