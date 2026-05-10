@@ -1,0 +1,80 @@
+SOLUCIÓN EXACTA QUE ARREGLA TU PROBLEMA
+Sustituye COMPLETAMENTE tu GetDropIndexByPosition por esta versión:
+
+csharp
+private int GetDropIndexByPosition(ItemsControl panel, Point mousePosInPanel)
+{
+    int count = panel.Items.Count;
+    if (count == 0) return 0;
+
+    double x = 0;
+
+    for (int i = 0; i < count; i++)
+    {
+        var container = panel.ItemContainerGenerator.ContainerFromIndex(i) as FrameworkElement;
+        if (container == null) continue;
+
+        double width = container.ActualWidth;
+        double center = x + width / 2;
+
+        if (mousePosInPanel.X < center)
+            return i;
+
+        x += width;
+    }
+
+    return count;
+}
+🔥 ¿Qué hace esto?
+Construye un “layout virtual” sumando anchos
+
+No usa TranslatePoint
+
+No usa posiciones animadas
+
+No depende del movimiento de las pestañas
+
+Funciona igual en ambas direcciones
+
+Es EXACTAMENTE lo que hace Chrome
+
+✅ CAMBIO 2 — Llamar al método con coordenadas correctas
+En tu Window_MouseMove, cambia:
+
+csharp
+currentDropIndex = GetDropIndexByPosition(panel, pos);
+por:
+
+csharp
+Point posInPanel = e.GetPosition(panel);
+currentDropIndex = GetDropIndexByPosition(panel, posInPanel);
+🎯 ¿Qué pasa ahora?
+Arrastras de derecha → izquierda → perfecto
+
+Arrastras de izquierda → derecha → también perfecto
+
+El dropIndicator ya no sigue a la pestaña equivocada
+
+El placeholder no rebota
+
+El reordenamiento se vuelve suave, estable y 100% Chrome-like
+
+Si quieres, te preparo tu Window_MouseMove completo ya corregido
+Solo dímelo y te lo dejo listo para copiar y pegar.
+
+pues ya funciona!!!!!
+
+
+
+
+Vamos a centrarnos en un solo contenedor de pestañas, en el cual tengo dos pestañas. si arrastro una pestaña por ejemplo la de la izquierda hacia la derecha, empieza el intercambio pero si muevo el ratón lo más minimo, la pestaña que estoy moviendo se pone en su lugar final del intercambio y la de la derecha se va a 0,0 y pero siguen moviendose solo si no nuevo el ratón, ya que si lo muevo pasa eso, pero solo pasa si el puntero del raton coindice con algun punto de la pestaña de la derecha, una vez ya ha pasado tod la pestaña de la derecha el limite en x del ratón, puedo mover y no hace ese efecto de ponerse a 0,0 y sigue moviendose correctamente.
+
+El problema está en la animación de 1500ms (línea 1269). Eso es 1.5 segundos de animación cada vez que cambia algo. Durante el drag, esto causa que:
+Se inicie una animación de 1.5s
+Mientras anima, mueves el ratón
+Se cancela y empieza otra animación de 1.5s
+Conflicto de animaciones = parpadeo
+
+creo que cuando se está haciendo drag de una pestaña, no se puede activar drag en ninguna otra.
+
+Solo hace este efecto cuando estoy hacidno drag, y la pestaña que muevo y la que se esta moviendo coinciden en algun punto con el puntero del ratón y lo muevo

@@ -1,0 +1,925 @@
+<Window x:Class="Multinavigator.Configuracion"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Multinavigator"
+        xmlns:res="clr-namespace:Multinavigator.Idiomas"
+        Title="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_WindowTitle}"
+        Width="750" Height="600"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False"
+        Background="#FAFAFA">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <Storyboard x:Key="EnableSaveButtonStoryboard">
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="BtnSaveHome"
+                                        Storyboard.TargetProperty="IsEnabled">
+                <DiscreteBooleanKeyFrame Value="True" KeyTime="0:0:0"/>
+            </BooleanAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Title}"
+                   FontSize="24" FontWeight="Bold"
+                   Margin="0 0 0 15"/>
+
+        <TabControl Grid.Row="1"
+                    x:Name="TabsConfig"
+                    Background="White"
+                    BorderBrush="#DDD"
+                    BorderThickness="1"
+                    SelectionChanged="TabsConfig_SelectionChanged">
+
+            <!-- ========================= -->
+            <!--          GENERAL          -->
+            <!-- ========================= -->
+            <TabItem Header="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_TabGeneral}">
+                <ScrollViewer Background="White">
+                    <StackPanel Margin="20">
+
+                        <!-- IDIOMA -->
+                        <Border BorderBrush="#DDD" BorderThickness="1"
+                    CornerRadius="5" Padding="12 10" Margin="0 0 0 20">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Language_Label}"
+                               FontSize="14" FontWeight="SemiBold"
+                               VerticalAlignment="Center" Margin="0 0 12 0"/>
+                                <ComboBox x:Name="CmbLanguage" Width="200" Height="28"
+                              SelectionChanged="CmbLanguage_SelectionChanged"
+                              DisplayMemberPath="DisplayName"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- PÁGINAS DE INICIO -->
+                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_HomePages_Title}"
+                       FontSize="18" FontWeight="Bold"
+                       Margin="0 0 0 10"/>
+                        <Border BorderBrush="#DDD" BorderThickness="1"
+                    CornerRadius="5" Padding="15" Margin="0 0 0 20">
+                            <StackPanel Cursor="">
+                                <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_HomePages_Desc}"
+                               Foreground="Gray" Margin="0 0 0 10"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="8"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <!-- Panel 1 -->
+                                    <Grid Grid.Column="0" Grid.Row="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="58"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_HomePages_Panel1}" VerticalAlignment="Center" FontWeight="Bold" Height="16"/>
+                                        <TextBox x:Name="TxtHome1" Grid.Column="1"
+                                     Padding="6 0" VerticalContentAlignment="Center" Margin="5,0,0,0" TextChanged="HomeTextChanged"/>
+                                    </Grid>
+
+                                    <!-- Panel 2 -->
+                                    <Grid Grid.Column="2" Grid.Row="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="58"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_HomePages_Panel2}" VerticalAlignment="Center" FontWeight="Bold" Height="16"/>
+                                        <TextBox x:Name="TxtHome2" Grid.Column="1"
+                                     Padding="6 0" VerticalContentAlignment="Center" Margin="5,0,0,0" TextChanged="HomeTextChanged"/>
+                                    </Grid>
+
+                                    <!-- Panel 3 -->
+                                    <Grid Grid.Column="0" Grid.Row="2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="58"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_HomePages_Panel3}" VerticalAlignment="Center" FontWeight="Bold" Height="16"/>
+                                        <TextBox x:Name="TxtHome3" Grid.Column="1"
+                                     Padding="6 0" VerticalContentAlignment="Center" Margin="5,0,0,0" TextChanged="HomeTextChanged"/>
+                                    </Grid>
+
+                                    <!-- Panel 4 -->
+                                    <Grid Grid.Column="2" Grid.Row="2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="58"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_HomePages_Panel4}" VerticalAlignment="Center" FontWeight="Bold" Height="16"/>
+                                        <TextBox x:Name="TxtHome4" Grid.Column="1"
+                                     Padding="6 0" VerticalContentAlignment="Center" Margin="5,0,0,0" TextChanged="HomeTextChanged"/>
+                                    </Grid>
+                                </Grid>
+
+                                <Button x:Name="BtnSaveHome"
+        Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_HomePages_Save}"
+        Width="180" Height="30"
+        HorizontalAlignment="Center"
+        Margin="0 10 0 0"
+        Click="SaveHomeUrls_Click">
+
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+
+                                            <!-- 🔥 Esto es lo que faltaba -->
+                                            <Setter Property="IsEnabled" Value="False"/>
+
+                                            <Setter Property="Background" Value="#E5E5E5"/>
+                                            <Setter Property="Foreground" Value="#999"/>
+                                            <Setter Property="BorderBrush" Value="#D0D0D0"/>
+                                            <Setter Property="BorderThickness" Value="1"/>
+                                            <Setter Property="Cursor" Value="Arrow"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="Button">
+                                                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="5"
+                                Padding="5">
+                                                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+
+                                            <Style.Triggers>
+                                                <Trigger Property="IsEnabled" Value="True">
+                                                    <Setter Property="Background" Value="#4CAF50"/>
+                                                    <Setter Property="Foreground" Value="White"/>
+                                                    <Setter Property="Cursor" Value="Hand"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+
+
+                            </StackPanel>
+                        </Border>
+
+                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Session_Title}"
+                       FontSize="18" FontWeight="Bold"
+                       Margin="0 0 0 10"/>
+                        <Border BorderBrush="#DDD" BorderThickness="1"
+                    CornerRadius="5" Padding="15" Margin="0 0 0 20">
+                            <CheckBox x:Name="ChkRestoreSession"
+                          Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Session_Restore}"
+                          Checked="ChkRestoreSession_Changed"
+                          Unchecked="ChkRestoreSession_Changed"/>
+                        </Border>
+
+                        <!-- BUSCADOR POR DEFECTO -->
+                        <Border BorderBrush="#DDD" BorderThickness="1"
+                    CornerRadius="5" Padding="15" Margin="0 0 0 20">
+                            <StackPanel>
+                                <DockPanel Margin="0 0 0 8">
+                                    <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Search_Title}"
+                                   FontSize="18" FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Search_Desc}"
+                                   Foreground="Gray" FontSize="11"
+                                   VerticalAlignment="Center"
+                                   Margin="10 0 0 0"/>
+                                </DockPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <ComboBox x:Name="CmbSearchEngine"
+                                  Height="30" Width="200"
+                                  SelectionChanged="CmbSearchEngine_SelectionChanged"
+                                  DisplayMemberPath="Name"/>
+                                    <Button Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Search_Save}"
+                                Height="30" Width="80"
+                                Margin="8 0 0 0"
+                                Click="SaveSearchEngine_Click"/>
+                                </StackPanel>
+
+                                <StackPanel x:Name="PnlCustomSearch"
+                                Orientation="Horizontal"
+                                Margin="0 8 0 0"
+                                Visibility="Collapsed">
+                                    <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Search_CustomUrl}" VerticalAlignment="Center" Margin="0 0 8 0"/>
+                                    <TextBox x:Name="TxtCustomSearch"
+                                 Width="300" Height="28"
+                                 Padding="6 0"
+                                 VerticalContentAlignment="Center"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- COPIA DE SEGURIDAD -->
+                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Backup_Title}"
+                       FontSize="18" FontWeight="Bold"
+                       Margin="0 0 0 10"/>
+                        <Border BorderBrush="#DDD" BorderThickness="1"
+                    CornerRadius="5" Padding="15" Margin="0 0 0 20">
+                            <StackPanel>
+                                <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Backup_Desc}"
+                               Margin="0 0 0 10" Foreground="Gray"/>
+                                <WrapPanel Margin="0 0 0 15">
+                                    <CheckBox x:Name="ChkBackupFavorites" Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Backup_Favorites}"
+                                  IsChecked="True" Margin="0 0 20 5"/>
+                                    <CheckBox x:Name="ChkBackupThemes" Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Backup_Themes}"
+                                  IsChecked="True" Margin="0 0 20 5"/>
+                                    <CheckBox x:Name="ChkBackupPermissions" Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Backup_Permissions}"
+                                  IsChecked="True" Margin="0 0 20 5"/>
+                                    <CheckBox x:Name="ChkBackupSettings" Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Backup_Settings}"
+                                  IsChecked="True" Margin="0 0 20 5"/>
+                                    <CheckBox x:Name="ChkBackupHistory" Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Backup_History}"
+                                  IsChecked="False" Margin="0 0 20 5"/>
+                                </WrapPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Backup_Export}"
+                                Width="180" Height="32"
+                                Margin="0 0 10 0" Click="ExportSettings_Click"/>
+                                    <Button Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Backup_Import}"
+                                Width="180" Height="32"
+                                Click="ImportSettings_Click"/>
+                                </StackPanel>
+                                <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Backup_NoCookies}"
+                               Foreground="Gray" FontSize="11" Margin="0 10 0 0"/>
+                            </StackPanel>
+                        </Border>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+
+            <!-- ========================= -->
+            <!--        APARIENCIA         -->
+            <!-- ========================= -->
+            <TabItem Header="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_TabApariencia}">
+                <ScrollViewer Background="White">
+                    <StackPanel Margin="20">
+
+                        <Grid Margin="0 0 0 20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto" MinWidth="297"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" HorizontalAlignment="Left">
+                                <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Appearance_Themes_Title}"
+                                           FontSize="18" FontWeight="Bold"
+                                           Margin="0 0 0 10"/>
+                                <Border BorderBrush="#DDD" BorderThickness="1"
+                                        Width="252" Height="100">
+                                    <ListBox x:Name="LstThemes" SelectionChanged="LstThemes_SelectionChanged" KeyboardNavigation.DirectionalNavigation="Cycle">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Button Grid.Column="0"
+                                                            Background="Transparent" BorderThickness="0"
+                                                            Cursor="Hand" Padding="4,0"
+                                                            Visibility="{Binding IsCustom, Converter={StaticResource BoolToVisibilityConverter}}"
+                                                            Tag="{Binding}"
+                                                            Click="BtnDeleteTheme_Click">
+                                                        <Viewbox Width="12" Height="14">
+                                                            <Canvas Width="24" Height="24">
+                                                                <Path Data="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6h14zM10 11v6M14 11v6"
+                                                                      Stroke="#CC0000" StrokeThickness="2"
+                                                                      StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                                                      StrokeLineJoin="Round" Fill="Transparent"/>
+                                                            </Canvas>
+                                                        </Viewbox>
+                                                    </Button>
+                                                    <TextBlock Grid.Column="1" Text="{Binding Name}" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </Border>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Margin="20 0 0 0" VerticalAlignment="Top">
+                                <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Appearance_Colors_Title}"
+                                           FontSize="18" FontWeight="Bold"
+                                           Margin="0 0 0 10"/>
+                                <Button Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Appearance_OpenEditor}"
+                                        Width="200" Height="35"
+                                        Click="BtnOpenThemeEditor_Click"
+                                        Margin="0 0 0 5"/>
+                                <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Appearance_EditorDesc}"
+                                           Foreground="Gray" FontSize="11"
+                                           TextWrapping="Wrap" Width="200"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <Border BorderBrush="#DDD" BorderThickness="1"
+                                Padding="10 0 10 0" Margin="0 0 0 20"
+                                Background="{DynamicResource WindowBackgroundBrush}" Height="110">
+                            <StackPanel>
+                                <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Appearance_Preview}"
+                                           Foreground="{DynamicResource WindowForegroundBrush}"
+                                           FontSize="14" FontWeight="Bold"
+                                           Margin="0 0 0 10" Height="19"/>
+                                <Grid Height="80" Background="Transparent">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                                        <Border Width="120" Height="35"
+                                                Background="{DynamicResource TabInactiveBrush}"
+                                                CornerRadius="10,10,0,0" Margin="2,0">
+                                            <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Appearance_Tab1}"
+                                                       Foreground="{DynamicResource TabTextBrush}"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Border Width="120" Height="35"
+                                                Background="{DynamicResource TabActiveBrush}"
+                                                BorderThickness="1,1,1,0"
+                                                CornerRadius="10,10,0,0" Margin="2,0">
+                                            <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Appearance_Tab2}"
+                                                       Foreground="{DynamicResource TabTextBrush}"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Border Width="120" Height="35"
+                                                Background="{DynamicResource IncognitoInactiveBrush}"
+                                                CornerRadius="10,10,0,0" Margin="2,0">
+                                            <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Appearance_Incognito}"
+                                                       Foreground="{DynamicResource IncognitoTextBrush}"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </StackPanel>
+                                    <Border Background="{DynamicResource NavBarBackgroundBrush}"
+                                            Height="40" VerticalAlignment="Top"
+                                            Padding="10,5" Margin="0,35,0,0">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Orientation="Horizontal" Grid.Column="0">
+                                                <Ellipse Width="20" Height="20"
+                                                         Fill="{DynamicResource ButtonAccentBrush}"
+                                                         Margin="5,0"/>
+                                                <Ellipse Width="20" Height="20"
+                                                         Fill="{DynamicResource ButtonAccentBrush}"
+                                                         Margin="5,0"/>
+                                            </StackPanel>
+                                            <Border Grid.Column="1"
+                                                    Background="{DynamicResource UrlBoxBackgroundBrush}"
+                                                    CornerRadius="10" Margin="10,0" Padding="10,5">
+                                                <TextBlock Text="https://example.com"
+                                                           Foreground="{DynamicResource UrlBoxForegroundBrush}"
+                                                           VerticalAlignment="Center"/>
+                                            </Border>
+                                            <Ellipse Width="20" Height="20"
+                                                     Fill="{DynamicResource ButtonAccentBrush}"
+                                                     Grid.Column="2"/>
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Appearance_Options}"
+                                   FontSize="18" FontWeight="Bold"
+                                   Margin="0 0 0 10"/>
+                        <CheckBox x:Name="ChkDarkModeIncognito"
+                                  Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Appearance_DarkIncognito}"
+                                  Margin="0 5"
+                                  IsChecked="{Binding AutoDarkModeIncognito}"
+                                  Checked="ChkDarkModeIncognito_Changed"
+                                  Unchecked="ChkDarkModeIncognito_Changed"/>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- ========================= -->
+            <!--       PRIVACIDAD          -->
+            <!-- ========================= -->
+            <TabItem Header="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_TabPrivacidad}">
+                <ScrollViewer Background="White">
+                    <StackPanel Margin="20">
+                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Privacy_Title}" FontSize="18" FontWeight="Bold" Margin="0 0 0 20"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- COOKIES -->
+                            <Border Grid.Column="0" BorderBrush="#DDD" BorderThickness="1" CornerRadius="8" Padding="15">
+                                <StackPanel HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Privacy_Cookies}" FontSize="15" FontWeight="Bold"
+                                               HorizontalAlignment="Center" Margin="0 0 0 10"/>
+                                    <TextBlock x:Name="TxtCookieCount" Text="..."
+                                               FontSize="22" FontWeight="Bold" Foreground="#4B96EA"
+                                               HorizontalAlignment="Center" Margin="0 0 0 5"/>
+                                    <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Privacy_CookiesUnit}" Foreground="#888" FontSize="11"
+                                               HorizontalAlignment="Center" Margin="0 0 0 15"/>
+                                    <Button Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Privacy_CookiesManage}" Width="100" Height="30" Margin="0 0 0 8"
+                                            Click="OpenCookies_Click"/>
+                                    <Button Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Privacy_DeleteAll}" Width="100" Height="30"
+                                            Background="#C62828" Foreground="White" BorderThickness="0"
+                                            Click="DeleteAllCookies_Click"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- HISTORIAL -->
+                            <Border Grid.Column="2" BorderBrush="#DDD" BorderThickness="1" CornerRadius="8" Padding="15">
+                                <StackPanel HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Privacy_History}" FontSize="15" FontWeight="Bold"
+                                               HorizontalAlignment="Center" Margin="0 0 0 10"/>
+                                    <TextBlock x:Name="TxtHistoryCount" Text="..."
+                                               FontSize="22" FontWeight="Bold" Foreground="#4B96EA"
+                                               HorizontalAlignment="Center" Margin="0 0 0 5"/>
+                                    <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Privacy_HistoryUnit}" Foreground="#888" FontSize="11"
+                                               HorizontalAlignment="Center" Margin="0 0 0 15"/>
+                                    <Button Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Privacy_HistoryView}" Width="100" Height="30" Margin="0 0 0 8"
+                                            Click="OpenHistory_Click"/>
+                                    <Button Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Privacy_DeleteAll}" Width="100" Height="30"
+                                            Background="#C62828" Foreground="White" BorderThickness="0"
+                                            Click="DeleteAllHistory_Click"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- CACHÉ -->
+                            <Border Grid.Column="4" BorderBrush="#DDD" BorderThickness="1" CornerRadius="8" Padding="15">
+                                <StackPanel HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Privacy_Cache}" FontSize="15" FontWeight="Bold"
+                                               HorizontalAlignment="Center" Margin="0 0 0 10"/>
+                                    <TextBlock x:Name="TxtCacheSize" Text="..."
+                                               FontSize="22" FontWeight="Bold" Foreground="#4B96EA"
+                                               HorizontalAlignment="Center" Margin="0 0 0 5"/>
+                                    <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Privacy_CacheUnit}" Foreground="#888" FontSize="11"
+                                               HorizontalAlignment="Center" Margin="0 0 0 15"/>
+                                    <Button Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Privacy_CacheDelete}" Width="100" Height="30"
+                                            Background="#C62828" Foreground="White" BorderThickness="0"
+                                            Click="DeleteCache_Click"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- ========================= -->
+            <!--        PERMISOS           -->
+            <!-- ========================= -->
+            <TabItem Header="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_TabPermisos}">
+                <ScrollViewer Background="White">
+                    <StackPanel Margin="20">
+
+                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Perms_GlobalTitle}"
+                                   FontSize="18" FontWeight="Bold"
+                                   Margin="0 0 0 10"/>
+                        <Grid Margin="0 0 0 20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Margin="0 0 10 0">
+                                <StackPanel Orientation="Horizontal" Margin="0 5">
+                                    <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Perms_Camera}" Width="150"/>
+                                    <ComboBox Width="150"
+                                              SelectedItem="{Binding GlobalCamera}"
+                                              ItemsSource="{x:Static local:PermissionValues.All}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0 5">
+                                    <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Perms_Mic}" Width="150"/>
+                                    <ComboBox Width="150"
+                                              SelectedItem="{Binding GlobalMicrophone}"
+                                              ItemsSource="{x:Static local:PermissionValues.All}"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Margin="10 0 0 0">
+                                <StackPanel Orientation="Horizontal" Margin="0 5">
+                                    <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Perms_Location}" Width="150"/>
+                                    <ComboBox Width="150"
+                                              SelectedItem="{Binding GlobalLocation}"
+                                              ItemsSource="{x:Static local:PermissionValues.All}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0 5">
+                                    <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Perms_Notifications}" Width="150"/>
+                                    <ComboBox Width="150"
+                                              SelectedItem="{Binding GlobalNotifications}"
+                                              ItemsSource="{x:Static local:PermissionValues.All}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+
+                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Perms_DomainTitle}"
+                                   FontSize="18" FontWeight="Bold"
+                                   Margin="0 0 0 10"/>
+                        <DataGrid ItemsSource="{Binding DomainPermissions}"
+                                  AutoGenerateColumns="False"
+                                  CanUserAddRows="False"
+                                  Margin="0 10 0 10"
+                                  HeadersVisibility="Column">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Perms_DomainCol}"
+                                                    Binding="{Binding Domain}" Width="*"/>
+                                <DataGridComboBoxColumn Header="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Perms_Camera}"
+                                                        SelectedItemBinding="{Binding Camera}"
+                                                        Width="100"
+                                                        ItemsSource="{x:Static local:PermissionValues.All}"/>
+                                <DataGridComboBoxColumn Header="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Perms_Mic}"
+                                                        SelectedItemBinding="{Binding Microphone}"
+                                                        Width="100"
+                                                        ItemsSource="{x:Static local:PermissionValues.All}"/>
+                                <DataGridComboBoxColumn Header="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Perms_Location}"
+                                                        SelectedItemBinding="{Binding Location}"
+                                                        Width="100"
+                                                        ItemsSource="{x:Static local:PermissionValues.All}"/>
+                                <DataGridComboBoxColumn Header="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Perms_Notifications}"
+                                                        SelectedItemBinding="{Binding Notifications}"
+                                                        Width="100"
+                                                        ItemsSource="{x:Static local:PermissionValues.All}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                            <Button Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Perms_AddDomain}"
+                                    Width="140" Margin="0 0 10 0"
+                                    Click="AddDomain_Click"/>
+                            <Button Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Perms_Reset}"
+                                    Width="160"
+                                    Click="ResetPermissions_Click"/>
+                        </StackPanel>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- ========================= -->
+            <!--        AVANZADO           -->
+            <!-- ========================= -->
+            <TabItem Header="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_TabAvanzado}">
+                <ScrollViewer Background="White">
+                    <StackPanel Margin="20">
+
+                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_Title}"
+                                   FontSize="18" FontWeight="Bold"
+                                   Margin="0 0 0 5"/>
+                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_Warning}"
+                                   Foreground="#E65100" FontSize="12" Margin="0 10 0 10"/>
+
+                        <!-- disable-background-networking -->
+                        <Border BorderBrush="#DDD" BorderThickness="1" CornerRadius="5" Padding="12" Margin="0 0 0 8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="220"/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox x:Name="ChkDisableBackgroundNetworking" Grid.Column="0"
+                                          Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_BgNetworking}"
+                                          FontWeight="SemiBold" VerticalAlignment="Center"
+                                          Checked="AdvancedFlag_Changed" Unchecked="AdvancedFlag_Changed"/>
+                                <Border Grid.Column="2" Background="#F5F5F5" CornerRadius="5" Padding="10">
+                                    <StackPanel>
+                                        <TextBlock x:Name="TxtStateBackgroundNetworking" FontWeight="Bold" FontSize="11" Margin="0 0 0 4"/>
+                                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_BgNetworking_Desc}" TextWrapping="Wrap" FontSize="11" Foreground="#555"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <!-- disable-sync -->
+                        <Border BorderBrush="#DDD" BorderThickness="1" CornerRadius="5" Padding="12" Margin="0 0 0 8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="220"/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox x:Name="ChkDisableSync" Grid.Column="0"
+                                          Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_Sync}"
+                                          FontWeight="SemiBold" VerticalAlignment="Center"
+                                          Checked="AdvancedFlag_Changed" Unchecked="AdvancedFlag_Changed"/>
+                                <Border Grid.Column="2" Background="#F5F5F5" CornerRadius="5" Padding="10">
+                                    <StackPanel>
+                                        <TextBlock x:Name="TxtStateSync" FontWeight="Bold" FontSize="11" Margin="0 0 0 4"/>
+                                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_Sync_Desc}" TextWrapping="Wrap" FontSize="11" Foreground="#555"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <!-- disable-translate -->
+                        <Border BorderBrush="#DDD" BorderThickness="1" CornerRadius="5" Padding="12" Margin="0 0 0 8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="220"/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox x:Name="ChkDisableTranslate" Grid.Column="0"
+                                          Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_Translate}"
+                                          FontWeight="SemiBold" VerticalAlignment="Center"
+                                          Checked="AdvancedFlag_Changed" Unchecked="AdvancedFlag_Changed"/>
+                                <Border Grid.Column="2" Background="#F5F5F5" CornerRadius="5" Padding="10">
+                                    <StackPanel>
+                                        <TextBlock x:Name="TxtStateTranslate" FontWeight="Bold" FontSize="11" Margin="0 0 0 4"/>
+                                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_Translate_Desc}" TextWrapping="Wrap" FontSize="11" Foreground="#555"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <!-- disable-extensions -->
+                        <Border BorderBrush="#DDD" BorderThickness="1" CornerRadius="5" Padding="12" Margin="0 0 0 8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="220"/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox x:Name="ChkDisableExtensions" Grid.Column="0"
+                                          Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_Extensions}"
+                                          FontWeight="SemiBold" VerticalAlignment="Center"
+                                          Checked="AdvancedFlag_Changed" Unchecked="AdvancedFlag_Changed"/>
+                                <Border Grid.Column="2" Background="#F5F5F5" CornerRadius="5" Padding="10">
+                                    <StackPanel>
+                                        <TextBlock x:Name="TxtStateExtensions" FontWeight="Bold" FontSize="11" Margin="0 0 0 4"/>
+                                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_Extensions_Desc}" TextWrapping="Wrap" FontSize="11" Foreground="#555"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <!-- disable-default-apps -->
+                        <Border BorderBrush="#DDD" BorderThickness="1" CornerRadius="5" Padding="12" Margin="0 0 0 8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="220"/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox x:Name="ChkDisableDefaultApps" Grid.Column="0"
+                                          Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_DefaultApps}"
+                                          FontWeight="SemiBold" VerticalAlignment="Center"
+                                          Checked="AdvancedFlag_Changed" Unchecked="AdvancedFlag_Changed"/>
+                                <Border Grid.Column="2" Background="#F5F5F5" CornerRadius="5" Padding="10">
+                                    <StackPanel>
+                                        <TextBlock x:Name="TxtStateDefaultApps" FontWeight="Bold" FontSize="11" Margin="0 0 0 4"/>
+                                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_DefaultApps_Desc}" TextWrapping="Wrap" FontSize="11" Foreground="#555"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <!-- no-default-browser-check -->
+                        <Border BorderBrush="#DDD" BorderThickness="1" CornerRadius="5" Padding="12" Margin="0 0 0 8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="220"/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox x:Name="ChkNoDefaultBrowserCheck" Grid.Column="0"
+                                          Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_DefaultBrowserCheck}"
+                                          FontWeight="SemiBold" VerticalAlignment="Center"
+                                          Checked="AdvancedFlag_Changed" Unchecked="AdvancedFlag_Changed"/>
+                                <Border Grid.Column="2" Background="#F5F5F5" CornerRadius="5" Padding="10">
+                                    <StackPanel>
+                                        <TextBlock x:Name="TxtStateDefaultBrowserCheck" FontWeight="Bold" FontSize="11" Margin="0 0 0 4"/>
+                                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_DefaultBrowserCheck_Desc}" TextWrapping="Wrap" FontSize="11" Foreground="#555"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <!-- metrics-recording-only -->
+                        <Border BorderBrush="#DDD" BorderThickness="1" CornerRadius="5" Padding="12" Margin="0 0 0 8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="220"/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox x:Name="ChkMetricsRecordingOnly" Grid.Column="0"
+                                          Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_Metrics}"
+                                          FontWeight="SemiBold" VerticalAlignment="Center"
+                                          Checked="AdvancedFlag_Changed" Unchecked="AdvancedFlag_Changed"/>
+                                <Border Grid.Column="2" Background="#F5F5F5" CornerRadius="5" Padding="10">
+                                    <StackPanel>
+                                        <TextBlock x:Name="TxtStateMetricsRecording" FontWeight="Bold" FontSize="11" Margin="0 0 0 4"/>
+                                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_Metrics_Desc}" TextWrapping="Wrap" FontSize="11" Foreground="#555"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <!-- disable-breakpad -->
+                        <Border BorderBrush="#DDD" BorderThickness="1" CornerRadius="5" Padding="12" Margin="0 0 0 8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="220"/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox x:Name="ChkDisableBreakpad" Grid.Column="0"
+                                          Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_Breakpad}"
+                                          FontWeight="SemiBold" VerticalAlignment="Center"
+                                          Checked="AdvancedFlag_Changed" Unchecked="AdvancedFlag_Changed"/>
+                                <Border Grid.Column="2" Background="#F5F5F5" CornerRadius="5" Padding="10">
+                                    <StackPanel>
+                                        <TextBlock x:Name="TxtStateBreakpad" FontWeight="Bold" FontSize="11" Margin="0 0 0 4"/>
+                                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_Breakpad_Desc}" TextWrapping="Wrap" FontSize="11" Foreground="#555"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <!-- disable-client-side-phishing-detection -->
+                        <Border BorderBrush="#DDD" BorderThickness="1" CornerRadius="5" Padding="12" Margin="0 0 0 8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="220"/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox x:Name="ChkDisablePhishingDetection" Grid.Column="0"
+                                          Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_Phishing}"
+                                          FontWeight="SemiBold" VerticalAlignment="Center"
+                                          Checked="AdvancedFlag_Changed" Unchecked="AdvancedFlag_Changed"/>
+                                <Border Grid.Column="2" Background="#F5F5F5" CornerRadius="5" Padding="10">
+                                    <StackPanel>
+                                        <TextBlock x:Name="TxtStatePhishingDetection" FontWeight="Bold" FontSize="11" Margin="0 0 0 4"/>
+                                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_Phishing_Desc}" TextWrapping="Wrap" FontSize="11" Foreground="#555"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <!-- disable-hang-monitor -->
+                        <Border BorderBrush="#DDD" BorderThickness="1" CornerRadius="5" Padding="12" Margin="0 0 0 8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="220"/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox x:Name="ChkDisableHangMonitor" Grid.Column="0"
+                                          Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_HangMonitor}"
+                                          FontWeight="SemiBold" VerticalAlignment="Center"
+                                          Checked="AdvancedFlag_Changed" Unchecked="AdvancedFlag_Changed"/>
+                                <Border Grid.Column="2" Background="#F5F5F5" CornerRadius="5" Padding="10">
+                                    <StackPanel>
+                                        <TextBlock x:Name="TxtStateHangMonitor" FontWeight="Bold" FontSize="11" Margin="0 0 0 4"/>
+                                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_HangMonitor_Desc}" TextWrapping="Wrap" FontSize="11" Foreground="#555"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <!-- disable-prompt-on-repost -->
+                        <Border BorderBrush="#DDD" BorderThickness="1" CornerRadius="5" Padding="12" Margin="0 0 0 8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="220"/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox x:Name="ChkDisablePromptOnRepost" Grid.Column="0"
+                                          Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_Repost}"
+                                          FontWeight="SemiBold" VerticalAlignment="Center"
+                                          Checked="AdvancedFlag_Changed" Unchecked="AdvancedFlag_Changed"/>
+                                <Border Grid.Column="2" Background="#F5F5F5" CornerRadius="5" Padding="10">
+                                    <StackPanel>
+                                        <TextBlock x:Name="TxtStatePromptOnRepost" FontWeight="Bold" FontSize="11" Margin="0 0 0 4"/>
+                                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_Repost_Desc}" TextWrapping="Wrap" FontSize="11" Foreground="#555"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <!-- disable-domain-reliability -->
+                        <Border BorderBrush="#DDD" BorderThickness="1" CornerRadius="5" Padding="12" Margin="0 0 0 8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="220"/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox x:Name="ChkDisableDomainReliability" Grid.Column="0"
+                                          Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_DomainReliability}"
+                                          FontWeight="SemiBold" VerticalAlignment="Center"
+                                          Checked="AdvancedFlag_Changed" Unchecked="AdvancedFlag_Changed"/>
+                                <Border Grid.Column="2" Background="#F5F5F5" CornerRadius="5" Padding="10">
+                                    <StackPanel>
+                                        <TextBlock x:Name="TxtStateDomainReliability" FontWeight="Bold" FontSize="11" Margin="0 0 0 4"/>
+                                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_DomainReliability_Desc}" TextWrapping="Wrap" FontSize="11" Foreground="#555"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <!-- disable-component-update -->
+                        <Border BorderBrush="#DDD" BorderThickness="1" CornerRadius="5" Padding="12" Margin="0 0 0 8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="220"/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox x:Name="ChkDisableComponentUpdate" Grid.Column="0"
+                                          Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_ComponentUpdate}"
+                                          FontWeight="SemiBold" VerticalAlignment="Center"
+                                          Checked="AdvancedFlag_Changed" Unchecked="AdvancedFlag_Changed"/>
+                                <Border Grid.Column="2" Background="#F5F5F5" CornerRadius="5" Padding="10">
+                                    <StackPanel>
+                                        <TextBlock x:Name="TxtStateComponentUpdate" FontWeight="Bold" FontSize="11" Margin="0 0 0 4"/>
+                                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_ComponentUpdate_Desc}" TextWrapping="Wrap" FontSize="11" Foreground="#555"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <!-- disable-background-timer-throttling -->
+                        <Border BorderBrush="#DDD" BorderThickness="1" CornerRadius="5" Padding="12" Margin="0 0 0 8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="220"/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox x:Name="ChkDisableBgTimerThrottling" Grid.Column="0"
+                                          Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_BgTimer}"
+                                          FontWeight="SemiBold" VerticalAlignment="Center"
+                                          Checked="AdvancedFlag_Changed" Unchecked="AdvancedFlag_Changed"/>
+                                <Border Grid.Column="2" Background="#F5F5F5" CornerRadius="5" Padding="10">
+                                    <StackPanel>
+                                        <TextBlock x:Name="TxtStateBgTimerThrottling" FontWeight="Bold" FontSize="11" Margin="0 0 0 4"/>
+                                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_BgTimer_Desc}" TextWrapping="Wrap" FontSize="11" Foreground="#555"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <!-- disable-renderer-backgrounding -->
+                        <Border BorderBrush="#DDD" BorderThickness="1" CornerRadius="5" Padding="12" Margin="0 0 0 8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="220"/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox x:Name="ChkDisableRendererBackgrounding" Grid.Column="0"
+                                          Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_RendererBg}"
+                                          FontWeight="SemiBold" VerticalAlignment="Center"
+                                          Checked="AdvancedFlag_Changed" Unchecked="AdvancedFlag_Changed"/>
+                                <Border Grid.Column="2" Background="#F5F5F5" CornerRadius="5" Padding="10">
+                                    <StackPanel>
+                                        <TextBlock x:Name="TxtStateRendererBackgrounding" FontWeight="Bold" FontSize="11" Margin="0 0 0 4"/>
+                                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_RendererBg_Desc}" TextWrapping="Wrap" FontSize="11" Foreground="#555"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <!-- disable-ipc-flooding-protection -->
+                        <Border BorderBrush="#DDD" BorderThickness="1" CornerRadius="5" Padding="12" Margin="0 0 0 8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="220"/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox x:Name="ChkDisableIpcFloodingProtection" Grid.Column="0"
+                                          Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_IpcFlood}"
+                                          FontWeight="SemiBold" VerticalAlignment="Center"
+                                          Checked="AdvancedFlag_Changed" Unchecked="AdvancedFlag_Changed"/>
+                                <Border Grid.Column="2" Background="#F5F5F5" CornerRadius="5" Padding="10">
+                                    <StackPanel>
+                                        <TextBlock x:Name="TxtStateIpcFloodingProtection" FontWeight="Bold" FontSize="11" Margin="0 0 0 4"/>
+                                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_IpcFlood_Desc}" TextWrapping="Wrap" FontSize="11" Foreground="#555"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Cfg_Adv_Warning}"
+                                   Foreground="#E65100" FontSize="11" Margin="0 15 0 0"/>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+</Window>

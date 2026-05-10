@@ -1,0 +1,46 @@
+<Window x:Class="Multinavigator.FavoriteEditDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:res="clr-namespace:Multinavigator.Idiomas"
+        Title="{Binding Source={StaticResource IdiomaGlobal}, Path=FavDlg_WindowTitle}"
+        Height="260" 
+        Width="460"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False"
+        ResizeMode="NoResize">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="90"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Source={StaticResource IdiomaGlobal}, Path=FavDlg_Title}"  VerticalAlignment="Center"/>
+        <TextBox   Grid.Row="0" Grid.Column="1" x:Name="TbTitle"      Height="26" Margin="0,4"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding Source={StaticResource IdiomaGlobal}, Path=FavDlg_Url}"    VerticalAlignment="Center"/>
+        <TextBox   Grid.Row="1" Grid.Column="1" x:Name="TbUrl"        Height="26" Margin="0,4"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding Source={StaticResource IdiomaGlobal}, Path=FavDlg_Folder}" VerticalAlignment="Center"/>
+        <TextBox   Grid.Row="2" Grid.Column="1" x:Name="TbFolder"     Height="26" Margin="0,4"/>
+
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="{Binding Source={StaticResource IdiomaGlobal}, Path=FavDlg_Favicon}" VerticalAlignment="Center"/>
+        <TextBox   Grid.Row="3" Grid.Column="1" x:Name="TbFaviconUrl" Height="26" Margin="0,4"
+                   ToolTip="{Binding Source={StaticResource IdiomaGlobal}, Path=FavDlg_FaviconTooltip}"/>
+
+        <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal"
+                    HorizontalAlignment="Right" Margin="0,8,0,0">
+            <Button Content="{Binding Source={StaticResource IdiomaGlobal}, Path=FavDlg_Save}"
+                    Width="80" Margin="0,0,8,0" IsDefault="True" Click="Save_Click"/>
+            <Button Content="{Binding Source={StaticResource IdiomaGlobal}, Path=FavDlg_Cancel}"
+                    Width="80" IsCancel="True"/>
+        </StackPanel>
+    </Grid>
+</Window>

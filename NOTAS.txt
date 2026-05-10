@@ -1,0 +1,135 @@
+
+Microsoft Partner petergardev@hotmail.com NIL0!
+Git multiAppDev yalovemosdev2@gmail.com NIL!
+ko-fi Multinavigator ko-fi.com/multinavigator google->yalovemosdev2@gmail.com
+Stripe google->yalovemosdev2@gmail.com mpmp-kjzu-okse-tanb-pwct mpmp-kjzu-okse-tanb-pwct
+
+
+PENDIENTE
+---------
+El popup bienvenida sale desplazado con un monitor probar con 2
+
+Al crear nueva ventana de incognito (boton derecho nueva) traducir lo que pone y cambiar el icono 
+
+Arrastrar links:
+	- Al arrastar links y soltar sobre el navegador, que se abra en esa pestaña y no en pestaña nueva. Si soltamos en la zona de pestañas si abre en nueva pestaña.
+
+Pestañas de incógnito:
+	- Al crear una no abre ninguna web, hay que escribirla en la barra
+	- Son pestañas aisladas con numeración propia, numero de pestaña incógnito aislada. Todas las pestañas con eses numero comparten sesiones.
+	- Al abrir un link de una pestaña de incognito en otra pestaña se comparte sesiones y tiene el mismo número de pestaña incognito asociada
+	- Al abrir un link de una pestaña normal que se pueda abrir en pestaña de incognito y navegue al link con nuevo numero de pestaña incognito
+	- Al activar modo incógnito de una pestaña normal que se active y navege pero sin sesiones activas (aislado total) y nuevo número de pestaña incognito
+	- Al arrastrar un link de una pestaña normal o incognito a una de incognito se abre el link pero sin sesiónes excepto si tiene el mismo numero de pestaña incognito.
+	- Al arrastrar un link de de incognito a una zona de pestañas, se crea pestaña de incognito con el mismo número de pestaña incognito.
+
+PROBADO OK:
+✅ Arrastrar links → navega en pestaña actual
+✅ Pestaña incógnito nueva sin URL / con HTML negro
+✅ Activar incógnito en pestaña existente → recarga misma URL aislada
+✅ Abrir link incógnito en otro navegador → hereda número y sesión
+✅ Abrir link en nueva pestaña → hereda número y sesión
+✅ Arrastrar link a zona de pestañas → hereda incógnito y número
+✅ Arrastrar link incógnito sobre WebView → convierte con mismo número
+✅ Pestañas hermanas comparten sesión real (mismo perfil)
+✅ Cerrar pestañas hermanas no destruye la sesión hasta que se cierra la última
+✅ No restaura pestañas incógnito al reiniciar
+
+
+Como queda: 
+Pestañas
+--------
+Arrastra pestañas para reordenarlas o moverlas entre los 4 paneles
+Clic derecho en una pestaña para duplicar, mover, cerrar y más opciones
+El marcador de color en la parte superior ayuda a organizar grupos de pestañas
+
+Links
+-----
+Arrastra cualquier link al área de navegación para abrirlo en esa misma pestaña
+Arrastra un link a la zona de pestañas para abrirlo en una pestaña nueva
+Clic derecho en un link para abrirlo en cualquiera de los 4 paneles
+
+Modo incógnito
+-------------
+Cada sesión incógnito tiene un número propio visible en la pestaña
+Las pestañas con el mismo número comparten sesión — si inicias sesión en una, las demás también la verán
+Pestañas con distinto número están completamente aisladas entre sí
+Al abrir un link desde una pestaña incógnito, la nueva pestaña hereda automáticamente su número de sesión
+Arrastra un link incógnito sobre cualquier pestaña para convertirla a incógnito con el mismo número
+Al cerrar todas las pestañas de una sesión, los datos se eliminan automáticamente
+
+Identidades Múltiples
+Cada número de sesión es un contenedor estanco. Puedes estar en la "Sesión 1" con tu correo personal y en la "Sesión 2" con tu correo de trabajo en el mismo panel, sin que los sitios web sepan que eres la misma persona.
+
+
+
+
+
+
+PROXIMAMENTE..
+- capturar area del navegador, poner en menu pestaña capturar ventana->area visible, todo, lo que enmarques
+
+HECHO Que al cerrar se abra como se dejo, posicion centro y un navegador o los 4 navegaores 
+HECHO las ventanas como configuracion solo se abren una vez
+HECHO doble click en centro
+HECHO el menu boton derecho del raton sobre pestaña actua sobre la ultima pestaña que se uso, desde en menu si va sobre la activa
+HECHO en el editor si editamos un tema editable que aparezca el nombre del tema en la caja de texto nombre
+HECHO en temas oscuros tambien temas oscuros para web, y cambiarlo en el editor que ya esta el check
+HECHO redactar disclamer y readme otros 
+HECHO revisar al arrastrar una pestaña se mueve desplazada 96px
+HECHO la primera vez que se ejecuta que se muestre la ventana de configuracion principal
+HECHO quitar barra menu y poner el logo y botones 1,2,3, y 4 y un boton de tres rayas para configuraciones
+HECHO poner color al boton central en el editor de temas
+HECHO Al mover un ghost parpadean los navegadores
+HECHO Crear boton mis notas (libreta) tipo agenda por dias y hora de notas y poder verlas y con avisos al iniciar.
+HECHO guardar pestañas y colores en pestañas, pero no las de modo incognito
+HECHO desactivar toda la telemetria que se pueda sin perder funcionalidades
+
+Multinavigator
+
+navegax4
+pestañas modo incognito independientes
+marcas de color en pestañas
+
+
+
+
+
+Grid (fila 0)
+ ├── Border izquierda
+ ├── ScrollViewer
+ │     └── Grid (TabsContainer1)
+ │           └── DockPanel
+ │                 ├── ItemsControl (StableCompressingTabPanel)
+ │                 └── Botón +
+ └── Border derecha
+
+
+ MENU PESTAÑA
+ ahora al hacer click con eol boton derecho del raton sobre una pestaña 
+ que aparezca: 
+
+ Sin marcar
+ Marcar con color->colores...
+ <SEPARADOR>
+ ir apagina de inicio
+ <SEPARADOR>
+ Activar modo incógnito
+ <SEPARADOR>
+ recargar pagina (ya tengo implementada la funcion)
+ <SEPARADOR>
+ nueva ventana-a la derecha
+			  -a la izquierda
+			  -al final
+			  -al principio
+			  
+ crear ventana incognito-a la derecha
+						  -a la izquierda
+						  -al final
+						  -al principio  
+ duplicar ventana (a la derecha) 
+ <SEPARADOR>
+ cerrar pestañas->esta
+				-todas a la derecha, 
+				-cerrar todas al a izquierda, 
+				-cerrar todas menos esta. 

@@ -1,0 +1,744 @@
+<Window x:Class="Multinavigator.ThemeEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:res="clr-namespace:Multinavigator.Idiomas"
+        Title="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_WindowTitle}"
+        Width="900" Height="750"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False"
+        Background="#F5F5F5">
+
+    <Window.Resources>
+        <!-- Recursos dinámicos para el preview -->
+        <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#FFEAEAEA"/>
+        <SolidColorBrush x:Key="TabInactiveBrush" Color="#FFcccccc"/>
+        <SolidColorBrush x:Key="TabActiveBrush" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="TabTextBrush" Color="#000000"/>
+        <SolidColorBrush x:Key="IncognitoInactiveBrush" Color="#FF333333"/>
+        <SolidColorBrush x:Key="IncognitoTextBrush" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="NavBarBackgroundBrush" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="UrlBoxBackgroundBrush" Color="#FFE9EFF9"/>
+        <SolidColorBrush x:Key="UrlBoxForegroundBrush" Color="#000000"/>
+        <SolidColorBrush x:Key="ButtonAccentBrush" Color="#FF4B96EA"/>
+
+        <!-- Estilo para los cuadros de color -->
+        <Style x:Key="ColorBoxStyle" TargetType="Border">
+            <Setter Property="Width" Value="20"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="BorderBrush" Value="#999"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid Margin="0,0,0,-6" Cursor="">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="156"/>
+            <RowDefinition/>
+            <RowDefinition Height="163.04"/>
+        </Grid.RowDefinitions>
+
+        <!-- Encabezado -->
+        <Border Grid.Row="0" Background="White" BorderBrush="#DDD" BorderThickness="0,0,0,1" Padding="20,10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_HeaderTitle}" FontSize="24" FontWeight="Bold" VerticalAlignment="Center"/>
+
+               
+            </Grid>
+        </Border>
+
+        <!-- VISTA PREVIA -->
+        <Border Grid.Row="1" Background="{DynamicResource WindowBackgroundBrush}" BorderBrush="#DDD" BorderThickness="0,0,0,1" Padding="10" Margin="0,0,0,25">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_PreviewTitle}" Foreground="{DynamicResource WindowForegroundBrush}" FontSize="16" FontWeight="Bold" Margin="0,0,0,5"/>
+
+                <Grid Grid.Row="1" x:Name="PreviewContainer">
+                    <Border Background="{DynamicResource WindowBackgroundBrush}" CornerRadius="5">
+                        <Grid>
+                            <!-- Pestañas -->
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="5,5,5,0">
+                                <Border Width="110" Height="32"
+                                    Background="{DynamicResource TabInactiveBrush}"
+                                    CornerRadius="8,8,0,0"
+                                    Margin="2,0"
+                                    VerticalAlignment="Bottom">
+                                    <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_PreviewTab1}"
+                                       Foreground="{DynamicResource TabTextBrush}"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       FontSize="12"/>
+                                </Border>
+
+                                <Border Width="110" Height="32"
+                                    Background="{DynamicResource TabActiveBrush}"
+                                    BorderThickness="1,1,1,0"
+                                    CornerRadius="8,8,0,0"
+                                    Margin="2,0"
+                                    VerticalAlignment="Bottom">
+                                    <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_PreviewTab2}"
+                                       Foreground="{DynamicResource TabTextBrush}"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       FontSize="12"
+                                       FontWeight="Bold"/>
+                                </Border>
+
+                                <Border Width="110" Height="32"
+                                    Background="{DynamicResource IncognitoInactiveBrush}"
+                                    CornerRadius="8,8,0,0"
+                                    Margin="2,0"
+                                    VerticalAlignment="Bottom">
+                                    <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_PreviewIncognito}"
+                                       Foreground="{DynamicResource IncognitoTextBrush}"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       FontSize="12"/>
+                                </Border>
+                            </StackPanel>
+
+                            <!-- Barra de navegación -->
+                            <Border Background="{DynamicResource NavBarBackgroundBrush}"
+                                Height="45"
+                                VerticalAlignment="Bottom"
+                                CornerRadius="0,0,5,5"
+                                Margin="0"
+                                Padding="10,5">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Orientation="Horizontal" Grid.Column="0">
+                                        <Ellipse Width="24" Height="24" 
+                             Fill="{DynamicResource ButtonAccentBrush}"
+                             Margin="5,0"/>
+                                        <Ellipse Width="24" Height="24" 
+                             Fill="{DynamicResource ButtonAccentBrush}"
+                             Margin="5,0"/>
+                                        <Ellipse Width="24" Height="24" 
+                             Fill="{DynamicResource ButtonAccentBrush}"
+                             Margin="5,0"/>
+                                    </StackPanel>
+
+                                    <Border Grid.Column="1"
+                                        Background="{DynamicResource UrlBoxBackgroundBrush}"
+                                        CornerRadius="8"
+                                        Margin="15,0"
+                                        Padding="12,0"
+                                        Height="32">
+                                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_PreviewUrl}"
+                                           Foreground="{DynamicResource UrlBoxForegroundBrush}"
+                                           VerticalAlignment="Center"
+                                           FontSize="13"/>
+                                    </Border>
+
+                                    <StackPanel Orientation="Horizontal" Grid.Column="2">
+                                        <Ellipse Width="24" Height="24" 
+                                             Fill="{DynamicResource ButtonAccentBrush}"
+                                             Margin="5,0"/>
+                                        <Ellipse Width="24" Height="24" 
+                                             Fill="{DynamicResource ButtonAccentBrush}"
+                                             Margin="5,0"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </Border>
+
+                </Grid>
+            </Grid>
+        </Border>
+
+        <!-- AJUSTES GLOBALES -->
+        <Border Grid.Row="1" Background="White" BorderBrush="#DDD" BorderThickness="0 0 0 1" 
+        Padding="20 10" Margin="0,131,0,0" Grid.RowSpan="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- MATIZ -->
+                <StackPanel Grid.Column="0">
+                    <DockPanel Margin="0 0 0 4">
+                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_Hue}" FontWeight="Bold" FontSize="12" Margin="0 0 7 0"/>
+                        <TextBlock x:Name="TxtHueShift" Text="0°" DockPanel.Dock="Right"
+                           FontSize="12" Foreground="#666" VerticalAlignment="Center"/>
+                    </DockPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="15*"/>
+                            <ColumnDefinition Width="76*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                <GradientStop Color="Red" Offset="0.055"/>
+                                <GradientStop Color="Yellow" Offset="0.225"/>
+                                <GradientStop Color="Lime" Offset="0.385"/>
+                                <GradientStop Color="Cyan" Offset="0.555"/>
+                                <GradientStop Color="Blue" Offset="0.725"/>
+                                <GradientStop Color="Magenta" Offset="0.885"/>
+                                <GradientStop Color="Red" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Grid.Background>
+                        <Slider x:Name="SliderHue" Minimum="-200" Maximum="160" Value="0"
+                        Height="20" ValueChanged="SliderHue_ValueChanged"
+                        Background="Transparent" Grid.ColumnSpan="2"/>
+                    </Grid>
+                </StackPanel>
+
+                <!-- SATURACIÓN -->
+                <StackPanel Grid.Column="2">
+                    <DockPanel Margin="0 0 0 4">
+                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_Saturation}" FontWeight="Bold" FontSize="12" Margin="0 0 7 0"/>
+                        <TextBlock x:Name="TxtSaturation" Text="0" DockPanel.Dock="Right"
+                           FontSize="12" Foreground="#666" VerticalAlignment="Center"/>
+                    </DockPanel>
+                    <Grid>
+                        <Grid.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                <GradientStop Color="Gray" Offset="0"/>
+                                <GradientStop Color="Red" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Grid.Background>
+                        <Slider x:Name="SliderSaturation" Minimum="-100" Maximum="100" Value="0"
+                        Height="20" ValueChanged="SliderSaturation_ValueChanged"
+                        Background="Transparent"/>
+                    </Grid>
+                </StackPanel>
+
+                <!-- LUMINOSIDAD -->
+                <StackPanel Grid.Column="4">
+                    <DockPanel Margin="0 0 0 4">
+                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_Luminosity}" FontWeight="Bold" FontSize="12" Margin="0 0 7 0"/>
+                        <TextBlock x:Name="TxtLuminosity" Text="0" DockPanel.Dock="Right"
+                           FontSize="12" Foreground="#666" VerticalAlignment="Center"/>
+                    </DockPanel>
+                    <Grid>
+                        <Grid.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                <GradientStop Color="Black" Offset="0"/>
+                                <GradientStop Color="White" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Grid.Background>
+                        <Slider x:Name="SliderLuminosity" Minimum="-100" Maximum="100" Value="0"
+                        Height="20" ValueChanged="SliderLuminosity_ValueChanged"
+                        Background="Transparent"/>
+                    </Grid>
+                </StackPanel>
+
+            </Grid>
+        </Border>
+
+        <!-- ÁREA DE EDICIÓN DE COLORES -->
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" Background="White" Margin="0,30,0,72" Grid.RowSpan="2">
+            <Grid Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="15"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="15"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- COLUMNA 1 -->
+                <StackPanel Grid.Column="0">
+
+                    <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_SecGeneral}" FontSize="16" FontWeight="Bold" Margin="0,0,0,15"/>
+
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Style="{StaticResource ColorBoxStyle}" 
+                        x:Name="ColorWindowBackground"
+                        MouseLeftButtonDown="ColorBox_Click"
+                        Tag="WindowBackground"/>
+                        <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_ColorWindowBg}" FontWeight="SemiBold" FontSize="11"/>
+                            <TextBox x:Name="TxtWindowBackground" Text="#FFFFFF" Tag="WindowBackground" HorizontalAlignment="Left" TextChanged="ColorTextBox_TextChanged" LostFocus="ColorTextBox_LostFocus" Width="100" FontSize="10" Foreground="#666"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Style="{StaticResource ColorBoxStyle}" 
+                        x:Name="ColorWindowForeground"
+                        MouseLeftButtonDown="ColorBox_Click"
+                        Tag="WindowForeground"/>
+                        <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_ColorWindowFg}" FontWeight="SemiBold" FontSize="11"/>
+                            <TextBox x:Name="TxtWindowForeground" Text="#000000" Tag="WindowForeground" HorizontalAlignment="Left" TextChanged="ColorTextBox_TextChanged" LostFocus="ColorTextBox_LostFocus" Width="100" FontSize="10" Foreground="#666"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_SecTabsNormal}" FontSize="16" FontWeight="Bold" Margin="0,20,0,15"/>
+
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Style="{StaticResource ColorBoxStyle}" 
+                        x:Name="ColorTabInactive"
+                        MouseLeftButtonDown="ColorBox_Click"
+                        Tag="TabInactive"/>
+                        <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_ColorTabInactive}" FontWeight="SemiBold" FontSize="11"/>
+                            <TextBox x:Name="TxtTabInactive" Text="#FFcccccc" Tag="TabInactive" HorizontalAlignment="Left" TextChanged="ColorTextBox_TextChanged" LostFocus="ColorTextBox_LostFocus" Width="100" FontSize="10" Foreground="#666"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Style="{StaticResource ColorBoxStyle}" 
+                        x:Name="ColorTabActive"
+                        MouseLeftButtonDown="ColorBox_Click"
+                        Tag="TabActive"/>
+                        <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_ColorTabActive}" FontWeight="SemiBold" FontSize="11"/>
+                            <TextBox x:Name="TxtTabActive" Text="#FFFFFF" Tag="TabActive" HorizontalAlignment="Left" TextChanged="ColorTextBox_TextChanged" LostFocus="ColorTextBox_LostFocus" Width="100" FontSize="10" Foreground="#666"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Style="{StaticResource ColorBoxStyle}" 
+                        x:Name="ColorTabHover"
+                        MouseLeftButtonDown="ColorBox_Click"
+                        Tag="TabHover"/>
+                        <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_ColorHover}" FontWeight="SemiBold" FontSize="11"/>
+                            <TextBox x:Name="TxtTabHover" Text="#FFF5F5F5" Tag="TabHover" HorizontalAlignment="Left" TextChanged="ColorTextBox_TextChanged" LostFocus="ColorTextBox_LostFocus" Width="100" FontSize="10" Foreground="#666"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Style="{StaticResource ColorBoxStyle}" 
+                        x:Name="ColorTabActiveHover"
+                        MouseLeftButtonDown="ColorBox_Click"
+                        Tag="TabActiveHover"/>
+                        <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_ColorTabActiveHover}" FontWeight="SemiBold" FontSize="11"/>
+                            <TextBox x:Name="TxtTabActiveHover" Text="#FFFFFF" Tag="TabActiveHover" HorizontalAlignment="Left" TextChanged="ColorTextBox_TextChanged" LostFocus="ColorTextBox_LostFocus" Width="100" FontSize="10" Foreground="#666"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Style="{StaticResource ColorBoxStyle}" 
+                            x:Name="ColorTabText"
+                            MouseLeftButtonDown="ColorBox_Click"
+                            Tag="TabText"/>
+                        <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_ColorTabText}" FontWeight="SemiBold" FontSize="11"/>
+                            <TextBox x:Name="TxtTabText" Text="#000000" Tag="TabText" HorizontalAlignment="Left" TextChanged="ColorTextBox_TextChanged" LostFocus="ColorTextBox_LostFocus" Width="100" FontSize="10" Foreground="#666"/>
+                        </StackPanel>
+                    </Grid>
+
+                </StackPanel>
+
+                <!-- COLUMNA 2 -->
+                <StackPanel Grid.Column="2" Cursor="">
+
+                    <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_SecNavBar}" FontSize="16" FontWeight="Bold" Margin="0,0,0,15"/>
+
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Style="{StaticResource ColorBoxStyle}" 
+                        x:Name="ColorNavBarBackground"
+                        MouseLeftButtonDown="ColorBox_Click"
+                        Tag="NavBarBackground"/>
+                        <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_ColorNavBarBg}" FontWeight="SemiBold" FontSize="11"/>
+                            <TextBox x:Name="TxtNavBarBackground" Text="#FFFFFF" Tag="NavBarBackground" HorizontalAlignment="Left" TextChanged="ColorTextBox_TextChanged" LostFocus="ColorTextBox_LostFocus" Width="100" FontSize="10" Foreground="#666"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,12" Visibility="Collapsed">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Style="{StaticResource ColorBoxStyle}" 
+                        x:Name="ColorNavBarForeground"
+                        MouseLeftButtonDown="ColorBox_Click"
+                        Tag="NavBarForeground"/>
+                        <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_ColorNavBarFg}" FontWeight="SemiBold" FontSize="11"/>
+                            <TextBox x:Name="TxtNavBarForeground" Text="#000000" Tag="NavBarForeground" HorizontalAlignment="Left" TextChanged="ColorTextBox_TextChanged" LostFocus="ColorTextBox_LostFocus" Width="100" FontSize="10" Foreground="#666"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Style="{StaticResource ColorBoxStyle}" 
+                        x:Name="ColorUrlBoxBackground"
+                        MouseLeftButtonDown="ColorBox_Click"
+                        Tag="UrlBoxBackground" Margin="0,5,0,5"/>
+                        <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center" Grid.ColumnSpan="2">
+                            <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_ColorUrlBg}" FontWeight="SemiBold" FontSize="11"/>
+                            <TextBox x:Name="TxtUrlBoxBackground" Text="#FFE9EFF9" Tag="UrlBoxBackground" HorizontalAlignment="Left" TextChanged="ColorTextBox_TextChanged" LostFocus="ColorTextBox_LostFocus" Width="100" FontSize="10" Foreground="#666"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Style="{StaticResource ColorBoxStyle}" 
+                            x:Name="ColorUrlBoxForeground"
+                            MouseLeftButtonDown="ColorBox_Click"
+                            Tag="UrlBoxForeground"/>
+                        <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_ColorUrlFg}" FontWeight="SemiBold" FontSize="11"/>
+                            <TextBox x:Name="TxtUrlBoxForeground" Text="#000000" Tag="UrlBoxForeground" HorizontalAlignment="Left" TextChanged="ColorTextBox_TextChanged" LostFocus="ColorTextBox_LostFocus" Width="100" FontSize="10" Foreground="#666"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_SecButtons}" FontSize="16" FontWeight="Bold" Margin="0,20,0,15"/>
+
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Style="{StaticResource ColorBoxStyle}" 
+                        x:Name="ColorButtonAccent"
+                        MouseLeftButtonDown="ColorBox_Click"
+                        Tag="ButtonAccent"/>
+                        <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_ColorButtonAccent}" FontWeight="SemiBold" FontSize="11" Cursor=""/>
+                            <TextBox x:Name="TxtButtonAccent" Text="#FF4B96EA" Tag="ButtonAccent" HorizontalAlignment="Left" TextChanged="ColorTextBox_TextChanged" LostFocus="ColorTextBox_LostFocus" Width="100" FontSize="10" Foreground="#666"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Style="{StaticResource ColorBoxStyle}" 
+                        x:Name="ColorButtonHover"
+                        MouseLeftButtonDown="ColorBox_Click"
+                        Tag="ButtonHover"/>
+                        <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_ColorHover}" FontWeight="SemiBold" FontSize="11"/>
+                            <TextBox x:Name="TxtButtonHover" Text="#DDDDDD" Tag="ButtonHover" HorizontalAlignment="Left" TextChanged="ColorTextBox_TextChanged" LostFocus="ColorTextBox_LostFocus" Width="100" FontSize="10" Foreground="#666"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Style="{StaticResource ColorBoxStyle}" 
+                            x:Name="ColorButtonPressed"
+                            MouseLeftButtonDown="ColorBox_Click"
+                            Tag="ButtonPressed"/>
+                        <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_ColorButtonPressed}" FontWeight="SemiBold" FontSize="11"/>
+                            <TextBox x:Name="TxtButtonPressed" Text="#CCCCCC" Tag="ButtonPressed" HorizontalAlignment="Left" TextChanged="ColorTextBox_TextChanged" LostFocus="ColorTextBox_LostFocus" Width="100" FontSize="10" Foreground="#666"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Margin="0,15,0,13">
+                        <CheckBox x:Name="ChkDarkWebContent"
+                                  Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_ColorDarkWebContent}"
+                                  VerticalAlignment="Center"
+                                  Margin="0,0,20,0"
+                                  FontSize="13" 
+                                  FontWeight="Bold" />
+                    </Grid>
+
+                </StackPanel>
+
+                <!-- COLUMNA 3 -->
+                <StackPanel Grid.Column="4">
+
+                    <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_SecButtonCentro}" FontSize="16" FontWeight="Bold" Margin="0,0,0,15"/>
+
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Style="{StaticResource ColorBoxStyle}" 
+                            x:Name="ColorButtonCentro"
+                            MouseLeftButtonDown="ColorBox_Click"
+                            Tag="ButtonCentro" Cursor=""/>
+                        <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_ColorButtonCentro}" FontWeight="SemiBold" FontSize="11" Cursor=""/>
+                            <TextBox x:Name="TxtButtonCentro" Text="#FF4B96EA" Tag="ButtonCentro" HorizontalAlignment="Left" TextChanged="ColorTextBox_TextChanged" LostFocus="ColorTextBox_LostFocus" Width="100" FontSize="10" Foreground="#666"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_SecIncognito}" FontSize="16" FontWeight="Bold" Margin="0,30,0,15"/>
+
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Style="{StaticResource ColorBoxStyle}" 
+                        x:Name="ColorIncognitoInactive"
+                        MouseLeftButtonDown="ColorBox_Click"
+                        Tag="IncognitoInactive"/>
+                        <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_ColorIncogInactive}" FontWeight="SemiBold" FontSize="11"/>
+                            <TextBox x:Name="TxtIncognitoInactive" Text="#FF333333" Tag="IncognitoInactive" HorizontalAlignment="Left" TextChanged="ColorTextBox_TextChanged" LostFocus="ColorTextBox_LostFocus" Width="100" FontSize="10" Foreground="#666"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Style="{StaticResource ColorBoxStyle}" 
+                        x:Name="ColorIncognitoActive"
+                        MouseLeftButtonDown="ColorBox_Click"
+                        Tag="IncognitoActive"/>
+                        <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_ColorIncogActive}" FontWeight="SemiBold" FontSize="11"/>
+                            <TextBox x:Name="TxtIncognitoActive" Text="#FF000000" Tag="IncognitoActive" HorizontalAlignment="Left" TextChanged="ColorTextBox_TextChanged" LostFocus="ColorTextBox_LostFocus" Width="100" FontSize="10" Foreground="#666"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Style="{StaticResource ColorBoxStyle}" 
+                        x:Name="ColorIncognitoHover"
+                        MouseLeftButtonDown="ColorBox_Click"
+                        Tag="IncognitoHover"/>
+                        <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_ColorHover}" FontWeight="SemiBold" FontSize="11"/>
+                            <TextBox x:Name="TxtIncognitoHover" Text="#FF3d3d3d" Tag="IncognitoHover" HorizontalAlignment="Left" TextChanged="ColorTextBox_TextChanged" LostFocus="ColorTextBox_LostFocus" Width="100" FontSize="10" Foreground="#666"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Style="{StaticResource ColorBoxStyle}" 
+                        x:Name="ColorIncognitoActiveHover"
+                        MouseLeftButtonDown="ColorBox_Click"
+                        Tag="IncognitoActiveHover"/>
+                        <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_ColorTabActiveHover}" FontWeight="SemiBold" FontSize="11"/>
+                            <TextBox x:Name="TxtIncognitoActiveHover" Text="#FF4d4d4d" Tag="IncognitoActiveHover" HorizontalAlignment="Left" TextChanged="ColorTextBox_TextChanged" LostFocus="ColorTextBox_LostFocus" Width="100" FontSize="10" Foreground="#666"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Style="{StaticResource ColorBoxStyle}" 
+                        x:Name="ColorIncognitoText"
+                        MouseLeftButtonDown="ColorBox_Click"
+                        Tag="IncognitoText"/>
+                        <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_ColorIncogText}" FontWeight="SemiBold" FontSize="11"/>
+                            <TextBox x:Name="TxtIncognitoText" Text="#FF4d4d4d" Tag="IncognitoText" HorizontalAlignment="Left" TextChanged="ColorTextBox_TextChanged" LostFocus="ColorTextBox_LostFocus" Width="100" FontSize="10" Foreground="#666"/>
+                        </StackPanel>
+                    </Grid>
+
+                </StackPanel>
+
+            </Grid>
+        </ScrollViewer>
+
+        <!-- Botones de acción -->
+        <Border Grid.Row="3" Background="White" BorderBrush="#DDD" BorderThickness="0,1,0,0" Padding="10" Margin="0,91,0,0">
+            <Grid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="center" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_LabelName}" VerticalAlignment="Center" Margin="0,0,10,0" FontSize="14"/>
+                    <Border BorderBrush="#DDD" BorderThickness="1" CornerRadius="8">
+                        <TextBox x:Name="TxtThemeName" Width="250" Height="32" VerticalContentAlignment="Center"
+                         FontSize="14" Padding="8,0" BorderThickness="0" Background="#FFFFEE"/>
+                    </Border>
+                    <Button Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_BtnSave}" Width="120" Height="35" Margin="20,0,0,0"
+                    Click="BtnSave_Click" FontSize="14" FontWeight="SemiBold"
+                    Background="#4CAF50" Foreground="White" BorderThickness="0" Cursor="Hand"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Button Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_BtnCancel}" Width="120" Height="35"
+                    Click="BtnCancel_Click" FontSize="14"
+                    Background="#F44336" Foreground="White" BorderThickness="0" Cursor="Hand"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- POPUP DEL COLOR PICKER -->
+        <Border x:Name="ColorPickerPopup" 
+        Grid.RowSpan="4"
+        Background="#AA000000"
+        Visibility="Collapsed">
+            <Border Background="White" 
+            Width="380" Height="280"
+            CornerRadius="10"
+            Padding="20"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- TÍTULO + PREVIEW + HEX -->
+                    <DockPanel Grid.Row="0" Margin="0 0 0 15">
+                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_PickerTitle}" FontSize="16" FontWeight="Bold"
+                           VerticalAlignment="Center"/>
+                        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                            <Border x:Name="ColorPreview" Width="40" Height="40"
+                            BorderBrush="#999" BorderThickness="2" CornerRadius="4"
+                            Margin="0 0 8 0"/>
+                            <TextBox x:Name="TxtHex" Width="110" Height="40"
+                             VerticalContentAlignment="Center"
+                             TextChanged="TxtHex_TextChanged"
+                             FontFamily="Consolas" FontSize="13"
+                             Padding="6 0"/>
+                        </StackPanel>
+                    </DockPanel>
+
+                    <!-- Controles HSL -->
+                    <StackPanel Grid.Row="1">
+                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_PickerHue}" FontWeight="Bold" Margin="0 0 0 3"/>
+                        <Grid Margin="0 0 0 10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="50"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid>
+                                <Grid.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                        <GradientStop Color="Red" Offset="0"/>
+                                        <GradientStop Color="Yellow" Offset="0.17"/>
+                                        <GradientStop Color="Lime" Offset="0.33"/>
+                                        <GradientStop Color="Cyan" Offset="0.5"/>
+                                        <GradientStop Color="Blue" Offset="0.67"/>
+                                        <GradientStop Color="Magenta" Offset="0.83"/>
+                                        <GradientStop Color="Red" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Grid.Background>
+                                <Slider x:Name="SliderH" Minimum="0" Maximum="360" Value="0"
+                                ValueChanged="SliderHSL_ValueChanged" TickFrequency="1"
+                                IsSnapToTickEnabled="True" Background="Transparent"/>
+                            </Grid>
+                            <TextBox Grid.Column="1" Text="{Binding Value, ElementName=SliderH, Mode=OneWay}"
+                             IsReadOnly="True" TextAlignment="Center" VerticalContentAlignment="Center"
+                             Margin="5 0 0 0"/>
+                        </Grid>
+
+                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_PickerSaturation}" FontWeight="Bold" Margin="0 0 0 3"/>
+                        <Grid Margin="0 0 0 10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="50"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid>
+                                <Grid.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                        <GradientStop Color="Gray" Offset="0"/>
+                                        <GradientStop Color="Red" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Grid.Background>
+                                <Slider x:Name="SliderS" Minimum="0" Maximum="100" Value="0"
+                                ValueChanged="SliderHSL_ValueChanged" TickFrequency="1"
+                                IsSnapToTickEnabled="True" Background="Transparent"/>
+                            </Grid>
+                            <TextBox Grid.Column="1" Text="{Binding Value, ElementName=SliderS, Mode=OneWay}"
+                             IsReadOnly="True" TextAlignment="Center" VerticalContentAlignment="Center"
+                             Margin="5 0 0 0"/>
+                        </Grid>
+
+                        <TextBlock Text="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_PickerLuminosity}" FontWeight="Bold" Margin="0 0 0 3"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="50"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid>
+                                <Grid.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                        <GradientStop Color="Black" Offset="0"/>
+                                        <GradientStop Color="White" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Grid.Background>
+                                <Slider x:Name="SliderL" Minimum="0" Maximum="100" Value="50"
+                                ValueChanged="SliderHSL_ValueChanged" TickFrequency="1"
+                                IsSnapToTickEnabled="True" Background="Transparent"/>
+                            </Grid>
+                            <TextBox Grid.Column="1" Text="{Binding Value, ElementName=SliderL, Mode=OneWay}"
+                             IsReadOnly="True" TextAlignment="Center" VerticalContentAlignment="Center"
+                             Margin="5 0 0 0"/>
+                        </Grid>
+                    </StackPanel>
+
+                    <!-- Botones -->
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 15 0 0">
+                        <Button Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_PickerOk}" Width="100" Height="32" Margin="0 0 10 0"
+                        Click="BtnPickerOk_Click"
+                        Background="#4CAF50" Foreground="White" BorderThickness="0" Cursor="Hand"/>
+                        <Button Content="{Binding Source={StaticResource IdiomaGlobal}, Path=Theme_PickerCancel}" Width="100" Height="32"
+                        Click="BtnPickerCancel_Click"
+                        Background="#F44336" Foreground="White" BorderThickness="0" Cursor="Hand"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Border>
+    </Grid>
+</Window>
