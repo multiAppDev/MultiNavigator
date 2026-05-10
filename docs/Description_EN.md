@@ -23,6 +23,8 @@ MultiNavigator was first released in 2001 — before Firefox, before Chrome. It 
 
 🕵️ Multi-Identity Incognito (Numbered Sessions) — The most powerful private browsing engine. Unlike other browsers, you can run multiple independent incognito sessions (Session 1, 2, 3...) simultaneously. Each one is a 100% isolated sandbox with its own cookies. Log into the same site with different accounts side-by-side!
 
+🎨 Visual Session Tracking — Each private session is color-coded and numbered. Never mix up your accounts again. Drag-and-drop links between panes while preserving the session's identity and cookie profile.
+
 🎛️ Granular privacy control — Decide individually what to allow on the web: telemetry, trackers, fingerprinting, cookies and more. Not just an on/off switch — real control.
 
 🎨 Fully customizable themes — Choose from multiple built-in themes or design your own with the integrated theme editor. Make the browser truly yours.
