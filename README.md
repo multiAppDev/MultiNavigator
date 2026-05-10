@@ -25,7 +25,7 @@
 <br>
 
 <p align="center">
-  <a href=https://github.com/multiAppDev/MultiNavigator/releases/download/v7.1.0/Multinavigator7_Setup.exe">
+  <a href="https://github.com/multiAppDev/MultiNavigator/releases/download/v7.1.0/Multinavigator7_Setup.exe">
     <img src="https://img.shields.io/badge/Download-Installer-blue?style=for-the-badge&logo=windows&logoColor=white" alt="Download MultiNavigator">
   </a>
 </p>
