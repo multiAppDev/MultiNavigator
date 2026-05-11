@@ -50,6 +50,18 @@ namespace Multinavigator
         private bool _isLoading;
         private bool _isIncognito;
 
+        private int _incognitoSessionNumber = 0;
+        public int IncognitoSessionNumber
+        {
+            get => _incognitoSessionNumber;
+            set
+            {
+                _incognitoSessionNumber = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(IncognitoSessionColor));
+            }
+        }
+
         public bool IsIncognito
         {
             get => _isIncognito;
@@ -59,6 +71,30 @@ namespace Multinavigator
                 OnPropertyChanged();
             }
         }
+
+        private static readonly string[] IncognitoSessionColors = new[]
+{
+    "#FFF4B0", "#A8FFF8", "#FFB0B0", "#A8FFC6", "#B0C6FF", "#FFD1A8", "#DBA8FF",
+    "#FFF5B5", "#AFFFF8", "#FFB5B5", "#AFFFCB", "#B5CBFF", "#FFD3AF", "#DDB0FF",
+    "#FFF5B8", "#B3FFF9", "#FFB8B8", "#B3FFCF", "#B8CFFF", "#FFD5B3", "#DFB3FF",
+    "#FFF6BB", "#B6FFF9", "#FFBBBB", "#B6FFD3", "#BBD3FF", "#FFD7B6", "#E1B6FF",
+    "#FFF7BD", "#BAFFFB", "#FFBDBD", "#BAFFD6", "#BDD6FF", "#FFD9BA", "#E3BAFF",
+    "#FFF7C0", "#BDFFFB", "#FFC0C0", "#BDFFDA", "#C0DAFF", "#FFDABD", "#E4BDFF",
+    "#FFF8C2", "#C1FFFC", "#FFC2C2", "#C1FFDC", "#C2DCFF", "#FFDCC1", "#E6C1FF",
+    "#FFF9C5", "#C4FFFC", "#FFC5C5", "#C4FFDE", "#C5DEFF", "#FFDEC4", "#E8C4FF",
+    "#FFF9C7", "#C6FFFC", "#FFC7C7", "#C6FFE0", "#C7E0FF", "#FFDFC6", "#E9C6FF",
+    "#FFFAC9", "#C9FFFD", "#FFC9C9", "#C9FFE2", "#C9E2FF", "#FFE0C9", "#EAC9FF",
+    "#FFFACB", "#CBFFFD", "#FFCBCB", "#CBFFE4", "#CBE4FF", "#FFE1CB", "#EBCBFF",
+    "#FFFBCD", "#CDFFFD", "#FFCDCD", "#CDFFE5", "#CDE5FF", "#FFE2CD", "#ECCDFF",
+    "#FFFBCF", "#CFFFFD", "#FFCFCF", "#CFFFE7", "#CFE7FF", "#FFE3CF", "#EDCFFF",
+    "#FFFCD1", "#D1FFFE", "#FFD1D1", "#D1FFE8", "#D1E8FF", "#FFE4D1", "#EED1FF",
+    "#FFFCD3", "#D3FFFE"
+};
+
+        public string IncognitoSessionColor =>
+            IncognitoSessionNumber > 0
+                ? IncognitoSessionColors[(IncognitoSessionNumber - 1) % IncognitoSessionColors.Length]
+                : "#FFFFFF";
 
         // ⭐ NUEVO: ruta del perfil temporal usado en modo incógnito
         public string? TempProfilePath { get; set; }
@@ -228,6 +264,9 @@ namespace Multinavigator
         private bool _updatingSugerencias = false;
         private bool _windowInitialized = false;
         private System.Windows.Threading.DispatcherTimer _saveTimer;
+        private int _incognitoSessionCounter = 0;
+        private Dictionary<int, (CoreWebView2Environment Env, string ProfilePath)> _incognitoSessions = new();
+        private TabInfo? _dragSourceTab = null;
 
         public MainWindow()
         {
@@ -322,13 +361,18 @@ namespace Multinavigator
                     Task.Delay(1200).ContinueWith(_ =>
                         Dispatcher.Invoke(() =>
                         {
-                            
                             PopupBienvenida.IsOpen = true;
 
                             PopupBienvenida.Dispatcher.BeginInvoke(() =>
                             {
                                 double popupWidth = ((FrameworkElement)PopupBienvenida.Child).ActualWidth;
-                                PopupBienvenida.HorizontalOffset = -popupWidth + BtnHamburguesa.ActualWidth + 3;
+
+                                double offsetCorrection = SystemParameters.VirtualScreenWidth > SystemParameters.PrimaryScreenWidth
+                                    ? popupWidth - BtnHamburguesa.ActualWidth - 3
+                                    : 0;
+
+                                PopupBienvenida.HorizontalOffset = -popupWidth + BtnHamburguesa.ActualWidth + 3 + offsetCorrection;
+
                             }, System.Windows.Threading.DispatcherPriority.Loaded);
 
                             cfg.FirstRun = false;
@@ -1017,6 +1061,7 @@ namespace Multinavigator
 
             // 3) CREAR NUEVO WEBVIEW
             var wv = new WebView2();
+            tab.WebView = wv;
 
             // 4) INSERTARLO EN EL HOST *ANTES* DE INICIALIZAR
             if (host != null)
@@ -1028,10 +1073,12 @@ namespace Multinavigator
             // 5) INICIALIZAR SEGÚN MODO
             if (tab.IsIncognito)
             {
+                tab.IncognitoSessionNumber = 0; // se asignará en InitIncognitoEnvironment
                 await InitIncognitoEnvironment(wv, tab);
             }
             else
             {
+                tab.IncognitoSessionNumber = 0; // ya no es incógnito
                 var env = _sharedEnvironment ??
                           await CoreWebView2Environment.CreateAsync(
                               browserExecutableFolder: null,
@@ -1041,15 +1088,20 @@ namespace Multinavigator
                 tab.TempProfilePath = null;
             }
 
-            // 6) NAVEGAR
+            // 5b) CONFIGURAR COREW EBVIEW2 ANTES DE NAVEGAR para que el DropScript esté activo
             if (wv.CoreWebView2 != null)
-                wv.Source = new Uri("https://www.google.com");
+                ConfigureCoreWebView2(wv, tab, wv.CoreWebView2);
+
+            // 6) NAVEGAR — usa la URL que tenía la pestaña, no google
+            string urlToLoad = !string.IsNullOrEmpty(tab.Url) ? tab.Url : "https://www.google.com";
+            if (wv.CoreWebView2 != null)
+                wv.Source = new Uri(urlToLoad);
             else
             {
                 wv.CoreWebView2InitializationCompleted += (s, args) =>
                 {
                     if (!args.IsSuccess) return;
-                    Dispatcher.Invoke(() => wv.Source = new Uri("https://www.google.com"));
+                    Dispatcher.Invoke(() => wv.Source = new Uri(urlToLoad));
                 };
             }
 
@@ -1071,11 +1123,7 @@ namespace Multinavigator
             // 9) CONFIGURAR WEBVIEW (incluyendo menú contextual)
             ConfigureWebView(wv, tab);
 
-            // 10) Si ya está inicializado, configurar CoreWebView2 directamente
-            if (wv.CoreWebView2 != null)
-                ConfigureCoreWebView2(wv, tab, wv.CoreWebView2);
-
-            tab.WebView = wv;
+            
             ApplyActiveTabToWeb(tab.PanelId);
         }
 
@@ -1086,7 +1134,13 @@ namespace Multinavigator
         private void UrlBox_GotFocus(object sender, RoutedEventArgs e)
         {
             if (sender is TextBox tb)
-                tb.SelectAll();
+            {
+                // Si es about:blank, vaciamos. Si no, seleccionamos todo.
+                if (tb.Text.Equals("about:blank", StringComparison.OrdinalIgnoreCase))
+                    tb.Text = string.Empty;
+                else
+                    tb.SelectAll();
+            }
         }
 
         private void UrlBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -1094,6 +1148,13 @@ namespace Multinavigator
             if (sender is TextBox tb && !tb.IsKeyboardFocused)
             {
                 tb.Focus();
+
+                // Ejecutamos la misma lógica de vaciado/selección al ganar foco por clic
+                if (tb.Text.Equals("about:blank", StringComparison.OrdinalIgnoreCase))
+                    tb.Text = string.Empty;
+                else
+                    tb.SelectAll();
+
                 e.Handled = true;
             }
         }
@@ -1102,7 +1163,12 @@ namespace Multinavigator
         {
             if (sender is TextBox tb)
             {
-                tb.SelectAll();
+                // En doble clic, si por alguna razón sigue ahí el texto, lo limpiamos
+                if (tb.Text.Equals("about:blank", StringComparison.OrdinalIgnoreCase))
+                    tb.Text = string.Empty;
+                else
+                    tb.SelectAll();
+
                 e.Handled = true;
             }
         }
@@ -1898,8 +1964,38 @@ namespace Multinavigator
                         CoreWebView2ContextMenuItemKind.Command);
                     item.CustomItemSelected += (_, __) =>
                     {
-                        Dispatcher.Invoke(() => CreateTabWithUrl(panelCapturado, linkUrl));
+                        Dispatcher.Invoke(() =>
+                        {
+                            if (tab.IsIncognito)
+                            {
+                                AddTab(panelCapturado, null, true, "end",
+                                       incognitoSessionNumber: tab.IncognitoSessionNumber);
+                                var newTab = GetTabsList(panelCapturado).LastOrDefault();
+                                if (newTab.WebView.CoreWebView2 != null)
+                                {
+                                    newTab.Url = linkUrl;
+                                    newTab.WebView.Source = new Uri(linkUrl);
+                                }
+                                else
+                                {
+                                    newTab.WebView.CoreWebView2InitializationCompleted += (s, args) =>
+                                    {
+                                        if (!args.IsSuccess) return;
+                                        Dispatcher.Invoke(() =>
+                                        {
+                                            newTab.Url = linkUrl;
+                                            newTab.WebView.Source = new Uri(linkUrl);
+                                        });
+                                    };
+                                }
+                            }
+                            else
+                            {
+                                CreateTabWithUrl(panelCapturado, linkUrl);
+                            }
+                        });
                     };
+
                     menuList.Add(item);
                 }
 
@@ -1914,13 +2010,32 @@ namespace Multinavigator
                     Dispatcher.Invoke(() =>
                     {
                         int panelId = DeterminePanelIdForWebView(wv);
-                        AddTab(panelId, null, true, "end");
-                        var list = GetTabsList(panelId);
-                        var newTab = list.LastOrDefault();
+                        int sessionNum = tab.IsIncognito ? tab.IncognitoSessionNumber : ++_incognitoSessionCounter;
+                        AddTab(panelId, null, true, "end", incognitoSessionNumber: sessionNum);
+                        var newTab = GetTabsList(panelId).LastOrDefault();
                         if (newTab?.WebView != null)
-                            newTab.WebView.Source = new Uri(linkUrl);
+                        {
+                            if (newTab.WebView.CoreWebView2 != null)
+                            {
+                                newTab.Url = linkUrl;
+                                newTab.WebView.Source = new Uri(linkUrl);
+                            }
+                            else
+                            {
+                                newTab.WebView.CoreWebView2InitializationCompleted += (s, args) =>
+                                {
+                                    if (!args.IsSuccess) return;
+                                    Dispatcher.Invoke(() =>
+                                    {
+                                        newTab.Url = linkUrl;
+                                        newTab.WebView.Source = new Uri(linkUrl);
+                                    });
+                                };
+                            }
+                        }
                     });
                 };
+
                 menuList.Add(itemIncognito);
 
                 var sep2 = wv.CoreWebView2.Environment.CreateContextMenuItem(
@@ -1973,11 +2088,30 @@ namespace Multinavigator
                 {
                     int panelId = DeterminePanelIdForWebView(wv);
                     var activeTab = GetTabsList(panelId).FirstOrDefault(t => t.IsActive);
-                    AddTab(panelId, activeTab, tab.IsIncognito, "right");
+                    int sessionNum = tab.IsIncognito ? tab.IncognitoSessionNumber : 0;
+                    AddTab(panelId, activeTab, tab.IsIncognito, "right", incognitoSessionNumber: sessionNum);
                     var list = GetTabsList(panelId);
                     var newTab = list.FirstOrDefault(t => t.IsActive);
                     if (newTab?.WebView != null)
-                        newTab.WebView.Source = new Uri(url);
+                    {
+                        if (newTab.WebView.CoreWebView2 != null)
+                        {
+                            newTab.Url = url;
+                            newTab.WebView.Source = new Uri(url);
+                        }
+                        else
+                        {
+                            newTab.WebView.CoreWebView2InitializationCompleted += (s, args) =>
+                            {
+                                if (!args.IsSuccess) return;
+                                Dispatcher.Invoke(() =>
+                                {
+                                    newTab.Url = url;
+                                    newTab.WebView.Source = new Uri(url);
+                                });
+                            };
+                        }
+                    }
                 });
             };
 
@@ -1997,21 +2131,137 @@ namespace Multinavigator
 
             core.WebMessageReceived += (sender, args) =>
             {
+          
                 try
                 {
                     var json = JsonDocument.Parse(args.WebMessageAsJson);
-                    if (json.RootElement.TryGetProperty("type", out var type) &&
-                        type.GetString() == "drop")
+                    if (json.RootElement.TryGetProperty("type", out var type))
                     {
-                        if (json.RootElement.TryGetProperty("url", out var urlProp))
+                        if (type.GetString() == "dragstart")
                         {
-                            string droppedUrl = ExtractUrlFromText(urlProp.GetString() ?? "");
+                            Dispatcher.Invoke(() => { _dragSourceTab = tab; });
+                            return;
+                        }
+
+                        if (type.GetString() == "drop")
+                        {
+                            string rawUrl = json.RootElement.GetProperty("url").GetString() ?? "";
+                            string droppedUrl = ExtractUrlFromText(rawUrl);
+
                             if (!string.IsNullOrEmpty(droppedUrl) &&
                                 Uri.TryCreate(droppedUrl, UriKind.Absolute, out Uri? uri) &&
                                 (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps))
                             {
-                                int panelId = DeterminePanelIdForWebView(wv);
-                                Dispatcher.Invoke(() => { CreateTabWithUrl(panelId, droppedUrl); });
+                                // Extraemos coordenadas del mensaje JS
+                                double mouseX = json.RootElement.GetProperty("x").GetDouble();
+                                double mouseY = json.RootElement.GetProperty("y").GetDouble();
+
+                                Dispatcher.Invoke(() =>
+                                {
+                                    // 1. Buscamos si cayó en algún panel de pestañas
+                                    int panelDestino = 0;
+                                    var paneles = new[] {
+                                                        new { P = (FrameworkElement)TabsPanel1, Id = 1 },
+                                                        new { P = (FrameworkElement)TabsPanel2, Id = 2 },
+                                                        new { P = (FrameworkElement)TabsPanel3, Id = 3 },
+                                                        new { P = (FrameworkElement)TabsPanel4, Id = 4 }
+                                                    };
+
+                                    foreach (var zona in paneles)
+                                    {
+                                        if (zona.P == null) continue;
+                                        Point p = zona.P.PointFromScreen(new Point(mouseX, mouseY));
+                                        if (p.X >= 0 && p.X <= zona.P.ActualWidth && p.Y >= 0 && p.Y <= zona.P.ActualHeight)
+                                        {
+                                            panelDestino = zona.Id;
+                                            break;
+                                        }
+                                    }
+
+                                    if (panelDestino > 0)
+                                    {
+                                        // ⭐ OPCIÓN A: Cayó en las pestañas -> Nueva pestaña usando TU AddTab
+                                        // Buscamos la pestaña origen para heredar el incógnito
+                                        var tabOrigen = Tabs1.Concat(Tabs2).Concat(Tabs3).Concat(Tabs4)
+                                                             .FirstOrDefault(t => t.WebView?.CoreWebView2 == core);
+
+                                        AddTab(
+                                            panelId: panelDestino,
+                                            incognito: tabOrigen?.IsIncognito ?? false,
+                                            incognitoSessionNumber: tabOrigen?.IncognitoSessionNumber ?? 0,
+                                            position: "end"
+                                        );
+
+                                        // Como tu AddTab crea la pestaña, ahora buscamos la nueva y le damos la URL
+                                        var lista = GetTabsList(panelDestino);
+                                        var nueva = lista.LastOrDefault();
+                                        if (nueva?.WebView != null)
+                                        {
+                                            if (nueva.WebView.CoreWebView2 != null)
+                                            {
+                                                nueva.Url = droppedUrl;
+                                                nueva.WebView.Source = uri;
+                                            }
+                                            else
+                                            {
+                                                nueva.WebView.CoreWebView2InitializationCompleted += (s, args) =>
+                                                {
+                                                    if (!args.IsSuccess) return;
+                                                    Dispatcher.Invoke(() =>
+                                                    {
+                                                        nueva.Url = droppedUrl;
+                                                        nueva.WebView.Source = uri;
+                                                    });
+                                                };
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        // ⭐ OPCIÓN B: Cayó en el cuerpo de la web
+                                        // Buscar sobre qué WebView cayó exactamente
+                                        var tabDestino = Tabs1.Concat(Tabs2).Concat(Tabs3).Concat(Tabs4)
+                                                              .FirstOrDefault(t =>
+                                                              {
+                                                                  if (t.WebView == null) return false;
+                                                                  var host = t.WebView.Parent as FrameworkElement;
+                                                                  if (host == null) return false;
+                                                                  Point p = host.PointFromScreen(new Point(mouseX, mouseY));
+                                                                  return p.X >= 0 && p.X <= host.ActualWidth &&
+                                                                         p.Y >= 0 && p.Y <= host.ActualHeight;
+                                                              });
+
+                                        if (tab.IsIncognito && tabDestino != null && tabDestino != tab)
+                                        {
+                                            // Link incógnito sobre otra pestaña → convertir destino a incógnito
+                                            tabDestino.IsIncognito = true;
+                                            tabDestino.IncognitoSessionNumber = tab.IncognitoSessionNumber;
+                                            tabDestino.Url = droppedUrl;
+                                            _ = InitIncognitoEnvironment(tabDestino.WebView!, tabDestino);
+                                        }
+                                        else
+                                        {
+                                            var origenReal = _dragSourceTab ?? tab;
+                                            if (origenReal.IsIncognito && tabDestino != null && tabDestino != origenReal)
+                                            {
+                                                tabDestino.IsIncognito = true;
+                                                tabDestino.IncognitoSessionNumber = origenReal.IncognitoSessionNumber;
+                                                tabDestino.Url = droppedUrl; // ← ya asignado, InitIncognitoEnvironment lo usará
+                                                _ = InitIncognitoEnvironment(tabDestino.WebView!, tabDestino).ContinueWith(_ =>
+                                                {
+                                                    Dispatcher.Invoke(() =>
+                                                    {
+                                                        tabDestino.WebView!.Source = new Uri(droppedUrl);
+                                                    });
+                                                });
+                                            }
+                                            else
+                                            {
+                                                wv.Source = uri;
+                                            }
+                                        }
+                                    }
+                                });
                             }
                         }
                     }
@@ -2248,28 +2498,108 @@ namespace Multinavigator
 
         private async Task InitIncognitoEnvironment(WebView2 wv, TabInfo tab)
         {
-            string tempProfile = System.IO.Path.Combine(
-                System.IO.Path.GetTempPath(),
-                "mn7_incog_" + Guid.NewGuid()
-            );
-            Directory.CreateDirectory(tempProfile);
+            CoreWebView2Environment incognitoEnv;
+            string tempProfile;
 
-            var incognitoEnv = await CoreWebView2Environment.CreateAsync(
-                browserExecutableFolder: null,
-                userDataFolder: tempProfile,
-                options: _envOptions
-            );
+            if (tab.IncognitoSessionNumber > 0 &&
+                _incognitoSessions.TryGetValue(tab.IncognitoSessionNumber, out var existing))
+            {
+                // Reutilizar entorno existente de la misma sesión
+                incognitoEnv = existing.Env;
+                tempProfile = existing.ProfilePath;
+            }
+            else
+            {
+                // Crear nuevo entorno
+                tempProfile = System.IO.Path.Combine(
+                    System.IO.Path.GetTempPath(),
+                    "mn7_incog_" + Guid.NewGuid()
+                );
+                Directory.CreateDirectory(tempProfile);
+
+                incognitoEnv = await CoreWebView2Environment.CreateAsync(
+                    browserExecutableFolder: null,
+                    userDataFolder: tempProfile,
+                    options: _envOptions
+                );
+
+                // Guardar para reutilizar si ya tiene número asignado
+                if (tab.IncognitoSessionNumber > 0)
+                    _incognitoSessions[tab.IncognitoSessionNumber] = (incognitoEnv, tempProfile);
+            }
 
             var controllerOptions = incognitoEnv.CreateCoreWebView2ControllerOptions();
             controllerOptions.IsInPrivateModeEnabled = true;
-            controllerOptions.ProfileName = Guid.NewGuid().ToString("N");
+            controllerOptions.ProfileName = tab.IncognitoSessionNumber.ToString(); // mismo nombre = misma sesión
 
             await wv.EnsureCoreWebView2Async(incognitoEnv, controllerOptions);
 
+            // Inyectar DropScript antes de navegar
+            await wv.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(DropScript);
+
             tab.TempProfilePath = tempProfile;
 
-            if (!string.IsNullOrEmpty(tab.Url))
+            // Solo asigna número nuevo si aún no tiene uno (puede venir ya asignado desde AddTab)
+            if (tab.IncognitoSessionNumber == 0)
+            {
+                tab.IncognitoSessionNumber = ++_incognitoSessionCounter;
+                // Guardar el nuevo entorno con el número recién asignado
+                _incognitoSessions[tab.IncognitoSessionNumber] = (incognitoEnv, tempProfile);
+            }
+
+            // Página de nueva pestaña incógnito
+            if (string.IsNullOrEmpty(tab.Url))
+            {
+                wv.NavigateToString($@"
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>{Idioma.Instance.Incognito_HTML_Title}</title>
+                        <meta charset='utf-8'/>
+                        <style>
+                            * {{ margin:0; padding:0; box-sizing:border-box; }}
+                            body {{
+                                background: #151515;
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                                justify-content: center;
+                                height: 100vh;
+                                font-family: 'Segoe UI', sans-serif;
+                                color: #808080;
+                                user-select: none;
+                            }}
+                            /* Contenedor del icono */
+                            .icon-container {{ 
+                                width: 64px; 
+                                height: 64px; 
+                                margin-bottom: 20px; 
+                                opacity: 0.9; 
+                            }}
+                            .icon-svg {{
+                                width: 100%;
+                                height: 100%;
+                                fill: #606060; /* Tu color solicitado */
+                            }}
+                            h1 {{ font-size: 22px; font-weight: 500; color: #ccc; margin-bottom: 10px; }}
+                            p {{ font-size: 14px; color: #777; text-align: center; line-height: 1.6; max-width: 450px; }}
+                        </style>
+                    </head>
+                    <body>
+                        <div class='icon-container'>
+                            <svg class='icon-svg' viewBox='0 0 14 14'>
+                                <path d='M2.54 1.22C2.66.52 3.27 0 3.98 0h6.04c.71 0 1.32.52 1.44 1.22l.71 4.28h1.05c.41 0 .75.34.75.75s-.34.75-.75.75H.78c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h1.05l.71-4.28ZM8.75 10.9c0-.83.67-1.5 1.5-1.5.83 0 1.5.67 1.5 1.5 0 .83-.67 1.5-1.5 1.5-.83 0-1.5-.67-1.5-1.5Zm1.5-3c-1.06 0-2 .55-2.53 1.39-.22-.09-.46-.14-.72-.14-.26 0-.5.05-.72.14-.53-.83-1.47-1.39-2.53-1.39-1.66 0-3 1.34-3 3 0 1.66 1.34 3 3 3 1.66 0 3-1.34 3-3v-.01l.04-.13c.02-.04.03-.05.04-.06.01 0 .05-.03.16-.03.12 0 .16.03.16.03l.04.06.04.13v.04c.02 1.64 1.36 2.96 3 2.96 1.66 0 3-1.34 3-3 0-1.66-1.34-3-3-3ZM3.75 9.4c.82 0 1.48.65 1.5 1.46v.03c0 .01 0 .03.01.03-.02.81-.68 1.47-1.5 1.47-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5Z'/>
+                            </svg>
+                        </div>
+                        <h1>{Idioma.Instance.Incognito_HTML_Header}</h1>
+                        <p>{Idioma.Instance.Incognito_HTML_Description}</p>
+                    </body>
+                    </html>");
+            }
+            else
+            {
                 wv.Source = new Uri(tab.Url);
+            }
         }
 
 
@@ -2282,55 +2612,135 @@ namespace Multinavigator
             if (!string.IsNullOrEmpty(url)) wv.Source = new Uri(url);
         }
 
+        private void CoreWebView2_WebMessageReceived(object sender, CoreWebView2WebMessageReceivedEventArgs e)
+        {
+            var webview = sender as WebView2;
+            // Buscamos la pestaña de donde sale el link
+            var tabOrigen = Tabs1.Concat(Tabs2).Concat(Tabs3).Concat(Tabs4)
+                                 .FirstOrDefault(t => t.WebView == webview);
+
+            if (tabOrigen == null) return;
+
+            try
+            {
+                // Usamos JsonDocument que es más ligero y ya lo tienes en tus usings
+                using var json = JsonDocument.Parse(e.WebMessageAsJson);
+                var root = json.RootElement;
+
+                if (root.TryGetProperty("type", out var type) && type.GetString() == "drop_link")
+                {
+                    string url = root.GetProperty("url").GetString() ?? "";
+                    double mouseX = root.GetProperty("x").GetDouble();
+                    double mouseY = root.GetProperty("y").GetDouble();
+
+                    Dispatcher.Invoke(() =>
+                    {
+                        // 1. Detectar si cayó en algún panel de pestañas
+                        int panelDestino = 0;
+                        var zonas = new[] {
+                    new { P = (FrameworkElement)TabsPanel1, Id = 1 },
+                    new { P = (FrameworkElement)TabsPanel2, Id = 2 },
+                    new { P = (FrameworkElement)TabsPanel3, Id = 3 },
+                    new { P = (FrameworkElement)TabsPanel4, Id = 4 }
+                };
+
+                        foreach (var zona in zonas)
+                        {
+                            if (zona.P == null) continue;
+                            Point p = zona.P.PointFromScreen(new Point(mouseX, mouseY));
+                            if (p.X >= 0 && p.X <= zona.P.ActualWidth && p.Y >= 0 && p.Y <= zona.P.ActualHeight)
+                            {
+                                panelDestino = zona.Id;
+                                break;
+                            }
+                        }
+
+                        if (panelDestino > 0)
+                        {
+                            // ⭐ USAMOS TU ADDTAB REAL
+                            // No hace falta 'CrearNuevaPestaña', usamos la que ya tienes
+                            AddTab(
+                                panelId: panelDestino,
+                                incognito: tabOrigen.IsIncognito,
+                                incognitoSessionNumber: tabOrigen.IncognitoSessionNumber,
+                                position: "end"
+                            );
+
+                            // 2. Buscamos la pestaña que acaba de crear AddTab para meterle la URL
+                            var lista = GetTabsList(panelDestino);
+                            var nuevaTab = lista.LastOrDefault(t => t.IsActive);
+                            if (nuevaTab?.WebView != null && !string.IsNullOrEmpty(url))
+                            {
+                                nuevaTab.WebView.Source = new Uri(url);
+                            }
+                        }
+                        else
+                        {
+                            // Si lo sueltas en el medio de la web, navega la actual
+                            webview.Source = new Uri(url);
+                        }
+                    });
+                }
+            }
+            catch { /* Errores de JSON o URL malformada */ }
+        }
 
         private const string DropScript = @"
-(function() {
-    document.addEventListener('dragover', function(e) {
-        var types = Array.from(e.dataTransfer.types);
-        // ⭐ Solo interceptar si NO hay archivos
-        if (!types.includes('Files')) {
-            e.preventDefault();
-            e.dataTransfer.dropEffect = 'copy';
-        }
-    }, true);
+                    (function() {
+                        document.addEventListener('dragstart', function(e) {
+                            window.chrome.webview.postMessage({ type: 'dragstart' });
+                        });
+                        document.addEventListener('dragover', function(e) {
+                            var types = Array.from(e.dataTransfer.types);
+                            // ⭐ Solo interceptar si NO hay archivos
+                            if (!types.includes('Files')) {
+                                e.preventDefault();
+                                e.dataTransfer.dropEffect = 'copy';
+                            }
+                        }, true);
     
-    document.addEventListener('drop', function(e) {
-        var types = Array.from(e.dataTransfer.types);
+                        document.addEventListener('drop', function(e) {
+                            var types = Array.from(e.dataTransfer.types);
         
-        // ⭐ Si hay archivos, dejar que la página lo maneje normalmente
-        if (types.includes('Files')) return;
+                            // ⭐ Si hay archivos, dejar que la página lo maneje normalmente
+                            if (types.includes('Files')) return;
         
-        var url = e.dataTransfer.getData('text/uri-list') || 
-                  e.dataTransfer.getData('text/plain') ||
-                  e.dataTransfer.getData('text/html');
+                            var url = e.dataTransfer.getData('text/uri-list') || 
+                                      e.dataTransfer.getData('text/plain') ||
+                                      e.dataTransfer.getData('text/html');
         
-        // ⭐ Solo interceptar si es una URL
-        if (url && url.startsWith('http')) {
-            e.preventDefault();
-            e.stopPropagation();
-            window.chrome.webview.postMessage({ type: 'drop', url: url });
-        }
-    }, true);
-})();
-";
+                            // ⭐ Solo interceptar si es una URL
+                            if (url && url.startsWith('http')) {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                window.chrome.webview.postMessage({ 
+                                    type: 'drop', 
+                                    url: url, 
+                                    x: e.screenX, 
+                                    y: e.screenY 
+                                });
+                            }
+                        }, true);
+                    })();
+                    ";
 
         private const string FaviconScript = @"
-(() => {
-    let selectors = [
-        'link[rel=""icon"" ]',
-        'link[rel=""shortcut icon"" ]',
-        'link[rel=""mask-icon"" ]',
-        'link[rel=""apple-touch-icon"" ]',
-        'link[rel=""apple-touch-icon-precomposed"" ]'
-    ];
-    for (let sel of selectors) {
-        let icon = document.querySelector(sel);
-        if (icon && icon.href)
-            return icon.href;
-    }
-    return null;
-})();
-";
+                (() => {
+                    let selectors = [
+                        'link[rel=""icon"" ]',
+                        'link[rel=""shortcut icon"" ]',
+                        'link[rel=""mask-icon"" ]',
+                        'link[rel=""apple-touch-icon"" ]',
+                        'link[rel=""apple-touch-icon-precomposed"" ]'
+                    ];
+                    for (let sel of selectors) {
+                        let icon = document.querySelector(sel);
+                        if (icon && icon.href)
+                            return icon.href;
+                    }
+                    return null;
+                })();
+                ";
 
         private string? CleanJsString(string? raw)
         {
@@ -2636,6 +3046,14 @@ namespace Multinavigator
             {
                 secureIcon.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#e0cc4c"));
                 tooltip.Content = Idioma.Instance.Main_SecureNoInfo;
+                return;
+            }
+
+            if (url.StartsWith("about:blank", StringComparison.OrdinalIgnoreCase))
+            {
+                // Usamos un gris suave (#909090) para indicar que es una página del sistema
+                secureIcon.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#909090"));
+                tooltip.Content = Idioma.Instance.Incognito_HTML_Title; // O una nueva clave como "Página interna"
                 return;
             }
 
@@ -2953,21 +3371,45 @@ namespace Multinavigator
             if (insertIndex < 0 || insertIndex > targetList.Count)
                 insertIndex = targetList.Count;
 
+            // ← NUEVO: detectar si el drag viene de una pestaña incógnito
+            // Buscamos la pestaña activa en cualquier panel como origen
+            var tabOrigen = _dragSourceTab ?? Tabs1.Concat(Tabs2).Concat(Tabs3).Concat(Tabs4)
+                                                   .FirstOrDefault(t => t.IsActive);
+            bool esIncognito = tabOrigen?.IsIncognito ?? false;
+            int sessionNum = esIncognito ? tabOrigen!.IncognitoSessionNumber : 0;
+
             foreach (var t in targetList)
                 t.IsActive = false;
 
-            var newTab = new TabInfo
+            // ← NUEVO: usar AddTab en lugar de crear TabInfo directamente
+            AddTab(
+                panelId: panelId,
+                incognito: esIncognito,
+                incognitoSessionNumber: sessionNum,
+                position: "end"
+            );
+
+            var nueva = targetList.LastOrDefault();
+            if (nueva?.WebView != null)
             {
-                Title = url,
-                Url = url,
-                FaviconUrl = "https://www.google.com/s2/favicons?domain=" + new Uri(url).Host,
-                PanelId = panelId,
-                IsActive = true
-            };
-
-            newTab.WebView = CreateWebViewForTab(newTab);
-
-            targetList.Insert(insertIndex, newTab);
+                if (nueva.WebView.CoreWebView2 != null)
+                {
+                    nueva.Url = url;
+                    nueva.WebView.Source = new Uri(url);
+                }
+                else
+                {
+                    nueva.WebView.CoreWebView2InitializationCompleted += (s, args) =>
+                    {
+                        if (!args.IsSuccess) return;
+                        Dispatcher.Invoke(() =>
+                        {
+                            nueva.Url = url;
+                            nueva.WebView.Source = new Uri(url);
+                        });
+                    };
+                }
+            }
 
             ApplyActiveTabToWeb(panelId);
             SaveCurrentSession();
@@ -3072,22 +3514,31 @@ namespace Multinavigator
         {
             if (!tab.IsIncognito) return;
 
-            // Dispose del WebView
             if (tab.WebView != null)
             {
                 try { tab.WebView.Dispose(); } catch { }
                 tab.WebView = null;
             }
 
-            // Borrar carpeta temporal
-            if (!string.IsNullOrEmpty(tab.TempProfilePath) &&
-                Directory.Exists(tab.TempProfilePath))
+            // Solo borrar el perfil si no quedan más pestañas con el mismo número de sesión
+            int sessionNum = tab.IncognitoSessionNumber;
+            bool hayHermanas = Tabs1.Concat(Tabs2).Concat(Tabs3).Concat(Tabs4)
+                                    .Any(t => t != tab && t.IsIncognito &&
+                                         t.IncognitoSessionNumber == sessionNum);
+
+            if (!hayHermanas)
             {
-                Task.Run(() =>
+                _incognitoSessions.Remove(sessionNum);
+
+                if (!string.IsNullOrEmpty(tab.TempProfilePath) &&
+                    Directory.Exists(tab.TempProfilePath))
                 {
-                    try { Directory.Delete(tab.TempProfilePath, recursive: true); }
-                    catch { /* Si falla, el SO lo limpiará eventualmente */ }
-                });
+                    Task.Run(() =>
+                    {
+                        try { Directory.Delete(tab.TempProfilePath, recursive: true); }
+                        catch { }
+                    });
+                }
             }
 
             tab.TempProfilePath = null;
@@ -3287,7 +3738,8 @@ namespace Multinavigator
                             TabInfo? reference = null,
                             bool incognito = false,
                             string position = "end",
-                            bool duplicate = false)
+                            bool duplicate = false,
+                            int incognitoSessionNumber = 0)
         {
             var list = GetTabsList(panelId);
 
@@ -3316,11 +3768,12 @@ namespace Multinavigator
             var newTab = new TabInfo
             {
                 Title = duplicate ? reference?.Title ?? Idioma.Instance.Main_NewTab : Idioma.Instance.Main_NewTab,
-                Url = duplicate ? reference?.Url ?? "https://www.google.com" : "https://www.google.com",
+                Url = duplicate ? reference?.Url ?? "https://www.google.com" : incognito ? "" : "https://www.google.com",   // ← vacío si incógnito
                 FaviconUrl = "https://www.google.com/s2/favicons?domain=google.com",
                 IsIncognito = incognito,
                 PanelId = panelId,
-                IsActive = true
+                IsActive = true,
+                IncognitoSessionNumber = incognitoSessionNumber  // ← asignar
             };
 
             newTab.WebView = CreateWebViewForTab(newTab);
@@ -3372,11 +3825,6 @@ namespace Multinavigator
             var tab = (mi?.DataContext as TabInfo);
             if (tab == null) return;
 
-            // LOG TEMPORAL — quitar después
-            #if DEBUG
-                System.Diagnostics.Debug.WriteLine($"[TabAction] PanelId={tab.PanelId} Title={tab.Title} Tag={mi.Tag}");
-            #endif
-
             string[] parts = (mi.Tag as string)?.Split(',') ?? Array.Empty<string>();
             if (parts.Length < 2) return;
 
@@ -3390,11 +3838,13 @@ namespace Multinavigator
                     break;
 
                 case "newincognito":
-                    AddTab(tab.PanelId, tab, true, pos);
+                    AddTab(tab.PanelId, tab, true, pos, incognitoSessionNumber: ++_incognitoSessionCounter);
                     break;
 
                 case "dup":
-                    AddTab(tab.PanelId, tab, tab.IsIncognito, pos, duplicate: true);
+                    // Si duplica incógnito, hereda el mismo número de sesión
+                    AddTab(tab.PanelId, tab, tab.IsIncognito, pos, duplicate: true,
+                           incognitoSessionNumber: tab.IsIncognito ? tab.IncognitoSessionNumber : 0);
                     break;
 
                 case "close":
