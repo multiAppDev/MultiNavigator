@@ -46,6 +46,8 @@ MultiNavigator nació en **2001**, antes que Firefox o Chrome... ☕ [Aún neces
 ### 4 Navegadores simultáneos y divisor móvil
 Gestiona cuatro instancias independientes en una sola ventana, optimizando el flujo de trabajo y eliminando la necesidad de alternar entre pestañas. Arrastra el divisor central para redimensionar cada panel en tiempo real según tus necesidades de visualización.
 
+<div align="center"><img src="screenshots/images/multiIncognito.png"></div>
+
 https://github.com/user-attachments/assets/44a2c553-151a-47dd-bed8-77fb5a75eb42
 
 ### Páginas de inicio y motor de búsqueda
