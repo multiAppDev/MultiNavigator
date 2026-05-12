@@ -59,6 +59,7 @@ Set a different home URL for each panel and choose your preferred global search 
 
 ### Multi-Identity Incognito (Advanced Sandboxing)
 Unlike standard browsers that share a single private session, MultiNavigator 7 introduces **Numbered Isolated Sessions**. This allows you to manage multiple independent identities simultaneously in the same window.
+<div align="center"><img src="screenshots/images/multiIncognito.png"></div>
 
 *   **Total Isolation:** Each incognito session (Session 1, 2, 3...) is a 100% separate sandbox with its own cookies and local storage.
 *   **Visual Identity:** Each session is identified by a unique color-coded badge and number, preventing cross-account mistakes.
